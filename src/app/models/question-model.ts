@@ -1,4 +1,9 @@
+import { AnswerModel } from './answer-model';
+
 export interface QuestionModel {
   id: number;
-  name: string;
+  gain: number;
+  question: string;
+  answers: AnswerModel[];
+  goodAnswer: number;
 }

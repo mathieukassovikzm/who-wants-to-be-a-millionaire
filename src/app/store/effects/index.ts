@@ -1,5 +1,5 @@
-import { InfosAppEffects } from './infos-app.effects';
+import { QuestionsEffects } from './question';
 
-export const effects: any[] = [InfosAppEffects];
+export const effects: any[] = [QuestionsEffects];
 
-export * from './infos-app.effects';
+export * from './question';

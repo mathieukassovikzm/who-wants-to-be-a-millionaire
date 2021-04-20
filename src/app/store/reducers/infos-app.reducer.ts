@@ -9,7 +9,7 @@ export interface InfosAppState {
 
 // Initial state of the store
 const initialState: InfosAppState = {
-  title: 'GIR Web',
+  title: 'Annif Papa',
   currentYear: new Date().getFullYear(),
   menuOpened: false
 };

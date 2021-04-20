@@ -16,4 +16,3 @@ export const getInfosAppMenuOpened = createSelector(
   getInfosAppState,
   fromInfosApp.getInfosAppMenuOpened
 );
-
