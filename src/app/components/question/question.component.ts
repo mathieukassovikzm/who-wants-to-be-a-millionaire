@@ -7,14 +7,12 @@ import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
-import { HeaderModule, FooterModule } from '@app/components/index';
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class QuestionComponent implements OnInit {
   title$: Observable<string> = new Observable<string>();
   birthday$: Observable<number> = new Observable<number>();
 
@@ -23,6 +21,7 @@ export class HomeComponent implements OnInit {
   constructor(public store: Store<fromStore.AppState>) {
     this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
     this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
+    this.questions$ = this.store.select<any>(fromQuestions.getAllQuestions);
   }
 
   ngOnInit(): void {
@@ -32,12 +31,8 @@ export class HomeComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    HeaderModule,
-    FooterModule
-  ],
-  exports: [HomeComponent]
+  declarations: [QuestionComponent],
+  imports: [CommonModule],
+  exports: [QuestionComponent]
 })
-export class HomeModule { }
+export class QuestionModule { }
