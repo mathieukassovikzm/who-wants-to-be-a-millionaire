@@ -8,10 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // NgRx
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from '@app/store/index';
+import { reducers, effects, CustomSerializer } from '@app/store/index';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,12 @@ import { reducers, effects } from '@app/store/index';
     StoreModule.forFeature('appState', reducers),
     EffectsModule.forRoot(),
     EffectsModule.forFeature(effects),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument()
   ],
   providers: [
-    Store
+    Store,
+    { provide: RouterStateSerializer, useClass: CustomSerializer }
   ],
   bootstrap: [AppComponent]
 })

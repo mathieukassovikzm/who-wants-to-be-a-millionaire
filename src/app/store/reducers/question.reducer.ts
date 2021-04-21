@@ -37,11 +37,11 @@ export function questionReducer(
     case QuestionsActionTypes.LOAD_QUESTIONS_SUCCESS:
       const questions = action.payload;
       const entities = questions.reduce(
-        (entities: { [id: number]: QuestionModel }, question: QuestionModel) => {
+        (ents: { [id: number]: QuestionModel }, question: QuestionModel) => {
           return {
-            ...entities,
+            ...ents,
             [question.id]: question
-          }
+          };
         }, {
         ...state.entities,
       }
