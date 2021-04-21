@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { QuestionsActionTypes, QuestionsActions } from '../actions/questions.actions';
 
 export interface QuestionsState {
-  data: QuestionModel[];
+  entities: { [id: number]: QuestionModel };
   currentQuestion: number;
   loaded: boolean;
   loading: boolean;
@@ -11,7 +11,7 @@ export interface QuestionsState {
 
 // Initial state of the store
 const initialState: QuestionsState = {
-  data: [],
+  entities: {},
   currentQuestion: 0,
   loaded: false,
   loading: false
@@ -35,9 +35,21 @@ export function questionReducer(
         loaded: false
       };
     case QuestionsActionTypes.LOAD_QUESTIONS_SUCCESS:
+      const questions = action.payload;
+      const entities = questions.reduce(
+        (entities: { [id: number]: QuestionModel }, question: QuestionModel) => {
+          return {
+            ...entities,
+            [question.id]: question
+          }
+        }, {
+        ...state.entities,
+      }
+      );
+
       return {
         ...state,
-        data: action.payload,
+        entities,
         loading: false,
         loaded: true
       };
@@ -46,7 +58,7 @@ export function questionReducer(
   }
 }
 
-export const getQuestionsData = (state: QuestionsState) => state.data;
+export const getQuestionsEntities = (state: QuestionsState) => state.entities;
 export const getQuestionsCurrentQuestion = (state: QuestionsState) => state.currentQuestion;
 export const getQuestionsLoading = (state: QuestionsState) => state.loading;
 export const getQuestionsLoaded = (state: QuestionsState) => state.loaded;
