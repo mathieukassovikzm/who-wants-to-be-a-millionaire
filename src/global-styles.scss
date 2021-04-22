@@ -1,3 +1,4 @@
+@import "styles";
 /* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */
 * {
@@ -20,9 +21,9 @@ body,
 
 body {
   position: relative;
-  font-family: $font-txt, sans-serif;
   line-height: 1.5;
   letter-spacing: 0.05em;
+  font-family: $font-txt, sans-serif;
   color: $txt-light;
   background-color: $site-bkg-color;
 }

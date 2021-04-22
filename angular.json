@@ -28,11 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/styles/styles.scss"
+              "src/app/styles/styles.scss",
+              "src/global-styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles/"
+                "src/app/styles"
               ]
             },
             "scripts": []

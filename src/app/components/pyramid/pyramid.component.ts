@@ -7,7 +7,9 @@ import * as fromStore from '@app/store/index';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import { ReversePipe } from '@app/helpers';
-
+import {
+  SvgGainModule
+} from '@app/components/index';
 
 @Component({
   selector: 'app-pyramid',
@@ -28,7 +30,10 @@ export class PyramidComponent implements OnInit {
 
 @NgModule({
   declarations: [PyramidComponent],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    SvgGainModule
+  ],
   exports: [PyramidComponent],
 })
 export class PyramidModule { }
