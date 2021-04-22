@@ -14,6 +14,13 @@ export const getAllQuestions = createSelector(
   }
 );
 
+export const getAllQuestionsReverse = createSelector(
+  getQuestionsEntities,
+  (entities) => {
+    return Object.keys(entities).map(id => entities[parseInt(id, 10)]).reverse();
+  }
+);
+
 export const getQuestionsCurrentQuestion = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsCurrentQuestion

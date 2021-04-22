@@ -1,3 +1,5 @@
-<p>
-  Pyramid
-</p>
+<ul>
+  <li *ngFor="let step of questions$|async ; index as i">
+    {{ step.id }}. {{ step.gain }}
+  </li>
+</ul>

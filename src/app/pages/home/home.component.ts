@@ -7,7 +7,7 @@ import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
-import { HeaderModule, FooterModule } from '@app/components/index';
+import { HeaderModule, FooterModule, PyramidModule } from '@app/components/index';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new fromQuestionsActions.ActLoadQuestions());
   }
-
 }
 
 @NgModule({
@@ -36,7 +35,8 @@ export class HomeComponent implements OnInit {
   imports: [
     CommonModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    PyramidModule
   ],
   exports: [HomeComponent]
 })

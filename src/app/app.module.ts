@@ -7,6 +7,8 @@ import { InMemoryDataService } from './services/in-memory-data.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ReversePipe } from '@app/helpers';
+
 // NgRx
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { Store, StoreModule } from '@ngrx/store';
@@ -16,7 +18,8 @@ import { reducers, effects, CustomSerializer } from '@app/store/index';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
