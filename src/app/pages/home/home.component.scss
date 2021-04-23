@@ -1,13 +1,8 @@
 :host {
-  .header,
-  .footer {
-    height: 10vh;
-  }
-  .main-section {
-    height: 80vh;
-    display: flex;
+  .home-section {
+    height: 100vh;
     .logo {
-      max-height: 200px;
+      max-height: 400px;
     }
   }
 }

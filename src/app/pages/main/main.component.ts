@@ -9,26 +9,23 @@ import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class MainComponent implements OnInit {
   title$: Observable<string> = new Observable<string>();
   birthday$: Observable<number> = new Observable<number>();
+
+  questions$: Observable<QuestionModel[]>;
 
   constructor(public store: Store<fromStore.AppState>) {
     this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
     this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
   }
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {
+    this.store.dispatch(new fromQuestionsActions.ActLoadQuestions());
+  }
 }
 
-@NgModule({
-  declarations: [FooterComponent],
-  imports: [CommonModule],
-  exports: [FooterComponent]
-})
-export class FooterModule { }

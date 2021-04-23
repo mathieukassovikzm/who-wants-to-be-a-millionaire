@@ -1,0 +1,13 @@
+:host {
+  .header,
+  .footer {
+    height: 10vh;
+  }
+  .main-section {
+    height: 80vh;
+    display: flex;
+    .logo {
+      max-height: 200px;
+    }
+  }
+}

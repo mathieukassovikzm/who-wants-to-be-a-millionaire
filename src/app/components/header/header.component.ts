@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
-import * as fromQuestions from '@app/store/selectors/question.selectors';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +12,8 @@ import * as fromQuestionsActions from '@app/store/actions/questions.actions';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  questions$: Observable<QuestionModel[]>;
 
   constructor(public store: Store<fromStore.AppState>) {
-    this.questions$ = this.store.select<any>(fromQuestions.getAllQuestions);
   }
 
   ngOnInit(): void {

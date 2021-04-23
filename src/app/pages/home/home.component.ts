@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { QuestionModel } from '@app/models/question-model';
 import { Observable } from 'rxjs';
@@ -7,7 +6,6 @@ import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
-import { HeaderModule, FooterModule, PyramidModule } from '@app/components/index';
 
 @Component({
   selector: 'app-home',
@@ -30,14 +28,4 @@ export class HomeComponent implements OnInit {
   }
 }
 
-@NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    HeaderModule,
-    FooterModule,
-    PyramidModule
-  ],
-  exports: [HomeComponent]
-})
-export class HomeModule { }
+

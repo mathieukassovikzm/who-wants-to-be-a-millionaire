@@ -9,7 +9,7 @@ import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import { ReversePipe } from '@app/helpers';
 import {
   SvgGainModule
-} from '@app/components/index';
+} from '@app/components/svgs';
 
 @Component({
   selector: 'app-pyramid',
