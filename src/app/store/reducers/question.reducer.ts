@@ -4,7 +4,7 @@ import { QuestionsActionTypes, QuestionsActions } from '../actions/questions.act
 
 export interface QuestionsState {
   entities: { [id: number]: QuestionModel };
-  currentQuestion: number;
+  currentQuestionId: number;
   loaded: boolean;
   loading: boolean;
 }
@@ -12,7 +12,7 @@ export interface QuestionsState {
 // Initial state of the store
 const initialState: QuestionsState = {
   entities: {},
-  currentQuestion: 0,
+  currentQuestionId: 1,
   loaded: false,
   loading: false
 };
@@ -59,6 +59,6 @@ export function questionReducer(
 }
 
 export const getQuestionsEntities = (state: QuestionsState) => state.entities;
-export const getQuestionsCurrentQuestion = (state: QuestionsState) => state.currentQuestion;
+export const getQuestionsCurrentQuestionId = (state: QuestionsState) => state.currentQuestionId;
 export const getQuestionsLoading = (state: QuestionsState) => state.loading;
 export const getQuestionsLoaded = (state: QuestionsState) => state.loaded;

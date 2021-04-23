@@ -21,9 +21,14 @@ export const getAllQuestionsReverse = createSelector(
   }
 );
 
+export const getQuestionsCurrentQuestionId = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsCurrentQuestionId
+);
+
 export const getQuestionsCurrentQuestion = createSelector(
   getQuestionsState,
-  fromQuestions.getQuestionsCurrentQuestion
+  fromQuestions.getQuestionsCurrentQuestionId
 );
 
 export const getQuestionsLoaded = createSelector(

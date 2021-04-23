@@ -4,11 +4,13 @@ import { HomeComponent } from './home.component';
 import {
   ButtonModule
 } from '@app/components/index';
+import { HomeRouterModule } from './home-routing.module';
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
-    ButtonModule
+    ButtonModule,
+    HomeRouterModule
   ],
   exports: [HomeComponent]
 })

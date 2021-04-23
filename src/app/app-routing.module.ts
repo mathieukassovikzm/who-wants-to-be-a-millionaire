@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  HomeComponent,
-  MainComponent
-} from './pages';
 
 const routes: Routes = [
   {
@@ -11,10 +7,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('@app/pages/home/home.module')
         .then(m => m.HomeModule),
-    component: HomeComponent,
   },
   {
-    path: 'question:/id',
+    path: 'question/:question-id',
     loadChildren: () =>
       import('@app/pages/main/main.module')
         .then(m => m.MainModule),

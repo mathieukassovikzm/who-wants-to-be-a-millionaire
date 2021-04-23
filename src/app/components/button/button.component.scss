@@ -1,12 +1,12 @@
 @import "styles";
 
-$pyramid-width: 400px;
 $pyramid-height: 50px;
 
 :host {
   .button {
     position: relative;
-    width: $pyramid-width;
+    left: 50%;
+    transform: translateX(-50%);
     height: $pyramid-height;
     .btn-txt {
       position: relative;
@@ -34,7 +34,7 @@ $pyramid-height: 50px;
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.1);
+      transform: translateX(-50%) scale(1.1);
     }
   }
 }

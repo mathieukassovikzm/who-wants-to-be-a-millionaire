@@ -1,8 +1,37 @@
+@import "styles";
+
 :host {
   .home-section {
+    position: relative;
     height: 100vh;
+    .top {
+      position: relative;
+      padding-top: 10px;
+      font-weight: bold;
+      font-size: 2.2em;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        transform: translateX(-50%);
+        border: 1px solid $txt-light;
+        width: 30%;
+      }
+    }
     .logo {
-      max-height: 400px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      max-height: 500px;
+    }
+    .button {
+      position: absolute;
+      bottom: 5%;
+      width: 30%;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }

@@ -29,7 +29,7 @@
             ],
             "styles": [
               "src/app/styles/styles.scss",
-              "src/global-styles.scss"
+              "src/app/styles/global-styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

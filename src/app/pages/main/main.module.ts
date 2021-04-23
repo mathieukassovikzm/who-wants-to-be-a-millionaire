@@ -6,6 +6,7 @@ import {
   FooterModule,
   PyramidModule
 } from '@app/components/index';
+import { MainRouterModule } from './main-routing.module';
 
 @NgModule({
   declarations: [MainComponent],
@@ -13,7 +14,8 @@ import {
     CommonModule,
     HeaderModule,
     FooterModule,
-    PyramidModule
+    PyramidModule,
+    MainRouterModule
   ],
   exports: [MainComponent]
 })
