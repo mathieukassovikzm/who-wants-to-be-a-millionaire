@@ -6,6 +6,7 @@ import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
+import * as fromRouterActions from '@app/store/actions/router.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -33,14 +34,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     const currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestionId);
 
     this.subscription = currentQuestion$.subscribe(questionId => {
-      this.router.navigate([`/question/${questionId}`]);
+      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+        payload: {
+          path: [`/question/${questionId}`],
+          query: {},
+          extras: { queryParams: questionId },
+        }
+      }
+      ));
     });
-
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }
-
-

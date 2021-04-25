@@ -46,12 +46,17 @@ export function questionReducer(
         ...state.entities,
       }
       );
-
       return {
         ...state,
         entities,
         loading: false,
         loaded: true
+      };
+    case QuestionsActionTypes.INCREMENT_QUESTION_ID:
+      const questionId = state.currentQuestionId + 1;
+      return {
+        ...state,
+        currentQuestionId: questionId
       };
     default:
       return state;

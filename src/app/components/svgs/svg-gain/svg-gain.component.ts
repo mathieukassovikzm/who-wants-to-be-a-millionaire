@@ -12,8 +12,8 @@ export class SvgGainComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [SvgGainComponent],
   imports: [CommonModule],
+  declarations: [SvgGainComponent],
   exports: [SvgGainComponent]
 })
 export class SvgGainModule { }

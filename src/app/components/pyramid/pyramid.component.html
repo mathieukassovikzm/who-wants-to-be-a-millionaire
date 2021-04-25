@@ -1,6 +1,10 @@
 <ul class="pyramid">
   <li class="item" *ngFor="let step of questions$|async ; index as i">
-    <p class="txt-gain">{{ step.id }}. {{ step.gain }}</p>
     <app-svg-gain class="svg-gain"></app-svg-gain>
+    <div class="item-txt">
+      <p class="txt-id">{{ step.id }}</p>
+      <app-svg-losange class="txt-dot"></app-svg-losange>
+      <p class="txt-gain">{{ step.gain }}</p>
+    </div>
   </li>
 </ul>

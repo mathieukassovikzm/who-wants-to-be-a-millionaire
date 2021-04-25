@@ -1,13 +1,49 @@
 :host {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+
+  &:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    height: 72%;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0.3;
+    background-image: url("./../../../assets/Logo-Qui-veut-gagner-des-millions.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+
   .header,
   .footer {
-    height: 10vh;
+    width: 100%;
+    // height: 5vh;
   }
   .main-section {
+    width: 100%;
     height: 80vh;
     display: flex;
-    .logo {
+    flex-wrap: wrap;
+    .section-logo {
       max-height: 200px;
+    }
+    .section-jokers {
+      display: flex;
+      ::ng-deep {
+        svg {
+          max-width: 200px;
+        }
+      }
+    }
+    .section-pyramid {
+    }
+    .section-question {
+      width: 100%;
     }
   }
 }

@@ -4,17 +4,29 @@ import { MainComponent } from './main.component';
 import {
   HeaderModule,
   FooterModule,
-  PyramidModule
+  PyramidModule,
+  QuestionModule,
+  ButtonModule
 } from '@app/components/index';
+import {
+  SvgJokerCallModule,
+  SvgJokerFiftyModule,
+  SvgJokerPublicModule
+} from '@app/components/svgs/index';
 import { MainRouterModule } from './main-routing.module';
 
 @NgModule({
   declarations: [MainComponent],
   imports: [
     CommonModule,
+    ButtonModule,
     HeaderModule,
     FooterModule,
     PyramidModule,
+    QuestionModule,
+    SvgJokerCallModule,
+    SvgJokerFiftyModule,
+    SvgJokerPublicModule,
     MainRouterModule
   ],
   exports: [MainComponent]

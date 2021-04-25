@@ -5,10 +5,10 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '@app/store/index';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import { ReversePipe } from '@app/helpers';
 import {
-  SvgGainModule
+  SvgGainModule,
+  SvgLosangeModule
 } from '@app/components/svgs';
 
 @Component({
@@ -32,7 +32,8 @@ export class PyramidComponent implements OnInit {
   declarations: [PyramidComponent],
   imports: [
     CommonModule,
-    SvgGainModule
+    SvgGainModule,
+    SvgLosangeModule
   ],
   exports: [PyramidComponent],
 })

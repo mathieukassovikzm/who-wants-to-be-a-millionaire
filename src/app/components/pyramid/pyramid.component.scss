@@ -1,5 +1,6 @@
+@import "styles";
 $pyramid-width: 400px;
-$pyramid-height: 50px;
+$pyramid-height: 25px;
 
 :host {
   .pyramid {
@@ -7,22 +8,37 @@ $pyramid-height: 50px;
       position: relative;
       width: $pyramid-width;
       height: $pyramid-height;
-      .txt-gain {
+      .item-txt {
         position: relative;
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
-        z-index: 2;
+        display: grid;
+        grid-template-columns: 40% 40px auto;
+        color: $secondary;
+        .txt-id {
+          justify-self: end;
+        }
+        .txt-dot {
+          opacity: 0;
+          justify-self: center;
+          width: 15px;
+          ::ng-deep {
+            svg polygon {
+              fill: $txt-light;
+            }
+          }
+        }
+        .txt-gain {
+          justify-self: start;
+        }
       }
       .svg-gain {
-        width: 100%;
-        height: 100%;
-        z-index: 1;
+        display: none;
         ::ng-deep {
           svg {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            height: 200%;
             top: 50%;
             left: 50%;
             transform: translateX(-50%) translateY(-50%);

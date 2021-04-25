@@ -22,7 +22,6 @@ export class QuestionService {
 
   /** GET Questions from the server */
   getQuestionsFromServeur(): Observable<QuestionModel[]> {
-    console.log('InService');
     return this.http.get<QuestionModel[]>(this.questionsUrl)
       .pipe(
         tap(_ => this.log('fetched Questions')),
