@@ -34,6 +34,12 @@
     }
     .section-jokers {
     }
+    .section-buttons {
+      display: flex;
+      .button {
+        width: 50%;
+      }
+    }
     .section-pyramid {
     }
     .section-question {

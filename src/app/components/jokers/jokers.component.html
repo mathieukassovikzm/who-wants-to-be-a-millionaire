@@ -1,3 +1,3 @@
-<app-svg-joker-fifty class="svg-joker"></app-svg-joker-fifty>
-<app-svg-joker-call class="svg-joker"></app-svg-joker-call>
-<app-svg-joker-public class="svg-joker"></app-svg-joker-public>
+<app-svg-joker-fifty [class]="getClassFifty()" (click)="useJokerFifty()"></app-svg-joker-fifty>
+<app-svg-joker-call [class]="getClassCall()" (click)="useJokerCall()"></app-svg-joker-call>
+<app-svg-joker-public [class]="getClassPublic()" (click)="useJokerPublic()"></app-svg-joker-public>

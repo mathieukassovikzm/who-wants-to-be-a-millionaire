@@ -16,6 +16,7 @@ $pyramid-height: 25px;
         display: grid;
         grid-template-columns: 40% 40px auto;
         color: $secondary;
+        font-weight: bold;
         .txt-id {
           justify-self: end;
         }

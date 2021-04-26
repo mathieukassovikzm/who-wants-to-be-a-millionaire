@@ -40,3 +40,18 @@ export const getQuestionsLoading = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsLoading
 );
+
+export const getQuestionsJokerFiftyUsed = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsJokerFiftyUsed
+);
+
+export const getQuestionsJokerCallUsed = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsJokerCallUsed
+);
+
+export const getQuestionsJokerPublicUsed = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsJokerPublicUsed
+);

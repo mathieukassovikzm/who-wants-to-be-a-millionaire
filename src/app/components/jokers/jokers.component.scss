@@ -3,7 +3,16 @@
   display: flex;
   .svg-joker {
     transition: all ease $anim-duration;
-
+    margin: 0 10px;
+    &.svg-joker-used {
+      ::ng-deep {
+        svg {
+          .cls-4.cross {
+            display: block;
+          }
+        }
+      }
+    }
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
