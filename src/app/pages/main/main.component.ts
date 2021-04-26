@@ -36,7 +36,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromQuestionsActions.ActLoadQuestions());
   }
 
   ngOnDestroy(): void {
@@ -54,7 +53,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromQuestionsActions.ActIncrementQuestionId());
   }
 
-  showAnswer() {
+  showAnswer(): void {
     console.log('showAnswer');
   }
 }

@@ -1,5 +1,5 @@
 <ul class="pyramid">
-  <li class="item" *ngFor="let step of questions$|async ; index as i">
+  <li [class]="getClass(step.id)" *ngFor="let step of questions$|async ; index as i">
     <app-svg-gain class="svg-gain"></app-svg-gain>
     <div class="item-txt">
       <p class="txt-id">{{ step.id }}</p>

@@ -6,13 +6,10 @@ import {
   FooterModule,
   PyramidModule,
   QuestionModule,
-  ButtonModule
+  ButtonModule,
+  JokersModule
 } from '@app/components/index';
-import {
-  SvgJokerCallModule,
-  SvgJokerFiftyModule,
-  SvgJokerPublicModule
-} from '@app/components/svgs/index';
+
 import { MainRouterModule } from './main-routing.module';
 
 @NgModule({
@@ -24,9 +21,7 @@ import { MainRouterModule } from './main-routing.module';
     FooterModule,
     PyramidModule,
     QuestionModule,
-    SvgJokerCallModule,
-    SvgJokerFiftyModule,
-    SvgJokerPublicModule,
+    JokersModule,
     MainRouterModule
   ],
   exports: [MainComponent]

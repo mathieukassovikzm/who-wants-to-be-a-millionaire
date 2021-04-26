@@ -12,7 +12,7 @@ export interface QuestionsState {
 // Initial state of the store
 const initialState: QuestionsState = {
   entities: {},
-  currentQuestionId: 1,
+  currentQuestionId: 0,
   loaded: false,
   loading: false
 };

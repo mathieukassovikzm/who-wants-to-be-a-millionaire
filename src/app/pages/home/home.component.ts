@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import * as fromRouterActions from '@app/store/actions/router.actions';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +27,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromQuestionsActions.ActLoadQuestions());
   }
 
   startGame(): void {
     const currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestionId);
+    this.store.dispatch(new fromQuestionsActions.ActIncrementQuestionId());
 
     this.subscription = currentQuestion$.subscribe(questionId => {
       this.store.dispatch(fromRouterActions.ActGoToNextQuestion({

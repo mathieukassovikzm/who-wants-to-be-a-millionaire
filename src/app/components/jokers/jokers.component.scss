@@ -1,0 +1,17 @@
+@import "styles";
+:host {
+  display: flex;
+  .svg-joker {
+    transition: all ease $anim-duration;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+  ::ng-deep {
+    svg {
+      max-width: 200px;
+    }
+  }
+}

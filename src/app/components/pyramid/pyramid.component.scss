@@ -45,6 +45,19 @@ $pyramid-height: 25px;
           }
         }
       }
+      &.item-active {
+        .item-txt .txt-dot {
+          opacity: 1;
+        }
+        .svg-gain {
+          display: block;
+        }
+      }
+      &.item-passed {
+        .item-txt .txt-dot {
+          opacity: 1;
+        }
+      }
     }
   }
 }
