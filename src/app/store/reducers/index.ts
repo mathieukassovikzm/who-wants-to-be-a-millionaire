@@ -35,9 +35,14 @@ export const getQuestionsState = createSelector(
   (state: AppState) => state.questions
 );
 
-export const getRouterState = createFeatureSelector<
+export const getRouterStateReducer = createFeatureSelector<
   fromRouter.RouterReducerState<RouterStateUrl>
 >('routerReducer');
+
+export const getRouterState = createSelector(
+  getAppState,
+  (state: AppState) => state.routerReducer
+);
 
 /*
  * Function called everytime we navigate

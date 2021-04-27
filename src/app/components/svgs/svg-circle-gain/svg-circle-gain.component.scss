@@ -1,0 +1,37 @@
+:host {
+  .cls-1 {
+    fill: #fff;
+  }
+
+  .cls-2 {
+    fill: #1e3d7a;
+  }
+
+  .cls-2,
+  .cls-3,
+  .cls-5 {
+    stroke: #fff;
+  }
+
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5 {
+    stroke-miterlimit: 10;
+    stroke-width: 3px;
+  }
+
+  .cls-3,
+  .cls-4 {
+    fill: none;
+  }
+
+  .cls-4 {
+    stroke: #e4eefa;
+    opacity: 0.62;
+  }
+
+  .cls-5 {
+    fill: #164290;
+  }
+}

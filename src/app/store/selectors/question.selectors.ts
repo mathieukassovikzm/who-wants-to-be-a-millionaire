@@ -1,6 +1,8 @@
+import { QuestionModel } from '@app/models/question-model';
 import { createSelector } from '@ngrx/store';
 import { getQuestionsState } from './../reducers/index';
 import * as fromQuestions from './../reducers/question.reducer';
+import { getRouterState } from './../reducers/index';
 
 export const getQuestionsEntities = createSelector(
   getQuestionsState,
@@ -27,8 +29,11 @@ export const getQuestionsCurrentQuestionId = createSelector(
 );
 
 export const getQuestionsCurrentQuestion = createSelector(
-  getQuestionsState,
-  fromQuestions.getQuestionsCurrentQuestionId
+  getAllQuestions,
+  getRouterState,
+  (entities: { [id: number]: QuestionModel }, router): QuestionModel => {
+    return router.state && entities[router.state.params.questionId - 1];
+  }
 );
 
 export const getQuestionsLoaded = createSelector(

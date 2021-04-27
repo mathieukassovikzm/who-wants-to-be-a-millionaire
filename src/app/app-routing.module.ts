@@ -9,7 +9,7 @@ const routes: Routes = [
         .then(m => m.HomeModule),
   },
   {
-    path: 'question/:question-id',
+    path: 'question/:questionId',
     loadChildren: () =>
       import('@app/pages/main/main.module')
         .then(m => m.MainModule),

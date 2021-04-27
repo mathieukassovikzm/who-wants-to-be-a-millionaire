@@ -23,16 +23,25 @@ export class MainComponent implements OnInit, OnDestroy {
   questions$: Observable<QuestionModel[]>;
   currentQuestionId$: Observable<number>;
   currentQuestionId: number;
+  currentQuestion$: Observable<QuestionModel>;
 
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>, private router: Router) {
     this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
     this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
     this.currentQuestionId$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestionId);
-    this.subscription = this.currentQuestionId$.subscribe(
+    const sub1 = this.currentQuestionId$.subscribe(
       questionId => this.currentQuestionId = questionId
     );
+
+    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestion);
+    const sub2 = this.currentQuestion$.subscribe(
+      question => console.log(question)
+    );
+
+    this.subscription.add(sub1);
+    this.subscription.add(sub2);
   }
 
   ngOnInit(): void {

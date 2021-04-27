@@ -7,9 +7,10 @@ import {
   PyramidModule,
   QuestionModule,
   ButtonModule,
-  JokersModule
 } from '@app/components/index';
-
+import {
+  SvgCircleGainModule,
+} from '@app/components/svgs/index';
 import { MainRouterModule } from './main-routing.module';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { MainRouterModule } from './main-routing.module';
     FooterModule,
     PyramidModule,
     QuestionModule,
-    JokersModule,
+    SvgCircleGainModule,
     MainRouterModule
   ],
   exports: [MainComponent]
