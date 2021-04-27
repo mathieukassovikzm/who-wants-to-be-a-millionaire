@@ -38,14 +38,31 @@ export class PyramidComponent implements OnInit, OnDestroy {
   }
 
   getClass(index: number): string {
-    if (index === this.currentQuestionId) {
-      return 'item item-active';
+    if (index === this.currentQuestionId && this.isStage(index)) {
+      return 'item item-active item-stage';
     }
-    else if (index < this.currentQuestionId) {
+    else if (index === this.currentQuestionId && !this.isStage(index)) {
+      return 'item item-active ';
+    }
+    else if (index < this.currentQuestionId && this.isStage(index)) {
+      return 'item item-passed item-stage';
+    }
+    else if (index < this.currentQuestionId && !this.isStage(index)) {
       return 'item item-passed';
+    }
+    else if (index > this.currentQuestionId && this.isStage(index)) {
+      return 'item item-stage';
     }
     else {
       return 'item';
+    }
+  }
+
+  isStage(index: number): boolean {
+    if (index === 5 || index === 10 || index === 15) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

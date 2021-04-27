@@ -59,6 +59,11 @@ $pyramid-height: 25px;
           opacity: 1;
         }
       }
+      &.item-stage {
+        .item-txt {
+          color: $txt-light;
+        }
+      }
     }
   }
 }
