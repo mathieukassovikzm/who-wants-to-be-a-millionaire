@@ -2,6 +2,7 @@ $height-header: 10vh;
 $height-main: 40vh;
 $height-question: 45vh;
 $height-footer: 100vh - $height-header - $height-question - $height-main;
+$height-pyramid: 100vh - $height-header;
 
 $round-height: 80%;
 $round-margin: 1%;
@@ -44,32 +45,38 @@ $buttons-height: 100% - $round-height - 2 * $round-margin;
   .main-section {
     position: relative;
     height: $height-main;
-    .section-logo {
-      position: relative;
-      width: auto;
-      height: $round-height;
-      margin-top: $round-margin;
-      margin-bottom: $round-margin;
-      .gain {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        font-weight: bold;
-        font-size: 26px;
+    .section-pyramid {
+      position: absolute;
+      bottom: 0;
+      height: 100%;
+    }
+    .main-section-content {
+      height: 100%;
+      .section-logo {
+        position: relative;
+        width: auto;
+        height: $round-height;
+        margin-top: $round-margin;
+        margin-bottom: $round-margin;
+        .gain {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          font-weight: bold;
+          font-size: 26px;
+        }
+      }
+      .section-buttons {
+        width: 60%;
+        height: $buttons-height;
+        display: flex;
+        margin: auto;
+        .button {
+          width: 50%;
+        }
       }
     }
-    .section-buttons {
-      width: 60%;
-      height: $buttons-height;
-      display: flex;
-      margin: auto;
-      .button {
-        width: 50%;
-      }
-    }
-  }
-  .section-pyramid {
   }
   .section-question {
     height: $height-question;

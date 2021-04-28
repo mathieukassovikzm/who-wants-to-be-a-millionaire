@@ -1,15 +1,16 @@
 <app-header class="header"></app-header>
 <section class="main-section">
-  <div class="section-logo">
-    <p class="gain">{{(currentQuestion$ | async)?.gain}}€</p>
-    <app-svg-circle-gain></app-svg-circle-gain>
-  </div>
-  <div class="section-buttons">
-    <app-button class="button" (click)="showAnswer()">Réponse</app-button>
-    <app-button class="button" (click)="nextQuestion()">Next</app-button>
+  <app-pyramid [class]="getPyramidClass()"></app-pyramid>
+  <div class="main-section-content">
+    <div class="section-logo">
+      <p class="gain">{{(currentQuestion$ | async)?.gain}}€</p>
+      <app-svg-circle-gain></app-svg-circle-gain>
+    </div>
+    <div class="section-buttons">
+      <app-button class="button" (click)="showAnswer()">Réponse</app-button>
+      <app-button class="button" (click)="nextQuestion()">Next</app-button>
+    </div>
   </div>
 </section>
 <app-question class="section-question"></app-question>
 <app-footer class="footer"></app-footer>
-
-<!-- <app-pyramid class="section-pyramid"></app-pyramid> -->

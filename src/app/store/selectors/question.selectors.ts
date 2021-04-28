@@ -32,7 +32,7 @@ export const getQuestionsCurrentQuestion = createSelector(
   getAllQuestions,
   getRouterState,
   (entities: { [id: number]: QuestionModel }, router): QuestionModel => {
-    return router.state && entities[router.state.params.questionId - 1];
+    return router.state && entities[router.state.params.questionId];
   }
 );
 

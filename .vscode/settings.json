@@ -2,5 +2,6 @@
   "cSpell.words": [
     "ngrx",
     "svgs"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

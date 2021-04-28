@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import * as fromStore from '@app/store/index';
 import * as fromRouterActions from '@app/store/actions/router.actions';
+import * as fromInfosAppActions from '@app/store/actions/infos-app.actions';
 
 import {
   JokersModule,
@@ -19,6 +21,7 @@ import {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   constructor(public store: Store<fromStore.AppState>) { }
   ngOnInit(): void { }
 
@@ -31,6 +34,10 @@ export class HeaderComponent implements OnInit {
       }
     }
     ));
+  }
+
+  togglePyramid(): void {
+    this.store.dispatch(new fromInfosAppActions.ActIfsToggleMenuOpened());
   }
 }
 
