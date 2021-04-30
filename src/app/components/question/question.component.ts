@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { QuestionModel } from '@app/models/question-model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '@app/store/index';
-import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
-import * as fromQuestions from '@app/store/selectors/question.selectors';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
+import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import {
-  SvgQuestionModule
+  SvgGainModule,
 } from '@app/components/svgs';
 
 @Component({
@@ -17,20 +15,23 @@ import {
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
+  currentQuestion$: Observable<QuestionModel>;
+  currentQuestion: QuestionModel;
+  subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>) {
   }
 
   ngOnInit(): void {
+    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestion);
   }
-
 }
 
 @NgModule({
   declarations: [QuestionComponent],
   imports: [
     CommonModule,
-    SvgQuestionModule
+    SvgGainModule
   ],
   exports: [QuestionComponent]
 })

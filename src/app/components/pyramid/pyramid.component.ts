@@ -77,3 +77,4 @@ export class PyramidComponent implements OnInit, OnDestroy {
   exports: [PyramidComponent],
 })
 export class PyramidModule { }
+

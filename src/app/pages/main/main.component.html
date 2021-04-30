@@ -1,6 +1,6 @@
 <app-header class="header"></app-header>
-<section class="main-section">
-  <app-pyramid [class]="getPyramidClass()"></app-pyramid>
+<section [class]="getMainClass()">
+  <app-pyramid class="section-pyramid"></app-pyramid>
   <div class="main-section-content">
     <div class="section-logo">
       <p class="gain">{{(currentQuestion$ | async)?.gain}}€</p>

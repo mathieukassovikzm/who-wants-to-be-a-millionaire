@@ -1,0 +1,31 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .question {
+    position: relative;
+    width: 100%;
+    p {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+  .answers-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .answer {
+      position: relative;
+      width: 50%;
+      p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+  }
+}

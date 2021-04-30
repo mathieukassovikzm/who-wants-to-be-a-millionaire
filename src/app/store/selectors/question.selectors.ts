@@ -30,9 +30,9 @@ export const getQuestionsCurrentQuestionId = createSelector(
 
 export const getQuestionsCurrentQuestion = createSelector(
   getAllQuestions,
-  getRouterState,
-  (entities: { [id: number]: QuestionModel }, router): QuestionModel => {
-    return router.state && entities[router.state.params.questionId];
+  getQuestionsCurrentQuestionId,
+  (entities: { [id: number]: QuestionModel }, questionId): QuestionModel => {
+    return entities[questionId];
   }
 );
 

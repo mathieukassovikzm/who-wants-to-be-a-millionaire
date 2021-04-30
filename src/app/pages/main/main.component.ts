@@ -56,8 +56,8 @@ export class MainComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getPyramidClass(): string {
-    return this.menuOpened ? 'section-pyramid opened' : 'section-pyramid';
+  getMainClass(): string {
+    return this.menuOpened ? 'main-section opened' : 'main-section';
   }
 
   nextQuestion(): void {
