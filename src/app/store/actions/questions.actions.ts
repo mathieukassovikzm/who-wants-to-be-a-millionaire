@@ -7,7 +7,6 @@ export enum QuestionsActionTypes {
   LOAD_QUESTIONS = '[Questions] Load Questions',
   LOAD_QUESTIONS_FAIL = '[Questions] Load Questions Fail',
   LOAD_QUESTIONS_SUCCESS = '[Questions] Load Questions Success',
-  INCREMENT_QUESTION_ID = '[Questions] Increment Question ID',
   JOKER_FIFTY_TO_FALSE = '[Questions] Joker Fifty To False',
   JOKER_CALL_TO_FALSE = '[Questions] Joker Call To False',
   JOKER_PUBLIC_TO_FALSE = '[Questions] Joker Public To False',
@@ -27,10 +26,6 @@ export class ActLoadQuestionsSuccess implements Action {
   constructor(public payload: QuestionModel[]) { }
 }
 
-export class ActIncrementQuestionId implements Action {
-  readonly type = QuestionsActionTypes.INCREMENT_QUESTION_ID;
-}
-
 export class ActJokerFiftyToFalse implements Action {
   readonly type = QuestionsActionTypes.JOKER_FIFTY_TO_FALSE;
 }
@@ -48,7 +43,6 @@ export type QuestionsActions =
   | ActLoadQuestions
   | ActLoadQuestionsFail
   | ActLoadQuestionsSuccess
-  | ActIncrementQuestionId
   | ActJokerFiftyToFalse
   | ActJokerCallToFalse
   | ActJokerPublicToFalse;

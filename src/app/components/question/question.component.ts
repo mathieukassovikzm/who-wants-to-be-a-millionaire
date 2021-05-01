@@ -23,7 +23,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestion);
+    this.currentQuestion$ = this.store.select<QuestionModel>(fromQuestionsSelectors.getCurrentQuestion);
   }
 }
 

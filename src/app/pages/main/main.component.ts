@@ -23,19 +23,25 @@ export class MainComponent implements OnInit, OnDestroy {
   menuOpened = false;
 
   questions$: Observable<QuestionModel[]>;
-  currentQuestionId$: Observable<number>;
-  currentQuestionId: number;
   currentQuestion$: Observable<QuestionModel>;
+  currentQuestionId: number;
 
   subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>, private router: Router) {
+  }
+
+  ngOnInit(): void {
     this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
     this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
 
-    this.currentQuestionId$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestionId);
-    const sub1 = this.currentQuestionId$.subscribe(
-      questionId => this.currentQuestionId = questionId
+    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
+    const sub1 = this.currentQuestion$.subscribe(
+      question => {
+        if (question) {
+          this.currentQuestionId = question.id
+        }
+      }
     );
 
     this.menuOpened$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppMenuOpened);
@@ -43,13 +49,8 @@ export class MainComponent implements OnInit, OnDestroy {
       res => this.menuOpened = res
     );
 
-    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestion);
-
     this.subscription.add(sub1);
     this.subscription.add(sub2);
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -63,12 +64,11 @@ export class MainComponent implements OnInit, OnDestroy {
   nextQuestion(): void {
     this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
       payload: {
-        path: [`/question/${this.currentQuestionId}`],
+        path: [`/question/${this.currentQuestionId + 1}`],
         query: {},
         extras: {},
       }
     }));
-    this.store.dispatch(new fromQuestionsActions.ActIncrementQuestionId());
   }
 
   showAnswer(): void {

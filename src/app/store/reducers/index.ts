@@ -5,8 +5,8 @@ import * as fromInfosApp from './infos-app.reducer';
 import * as fromQuestions from './question.reducer';
 
 export interface AppState {
-  infosApp: fromInfosApp.InfosAppState;
-  questions: fromQuestions.QuestionsState;
+  infosAppReducer: fromInfosApp.InfosAppState;
+  questionsReducer: fromQuestions.QuestionsState;
   routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -17,8 +17,8 @@ export interface RouterStateUrl {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  infosApp: fromInfosApp.infosAppReducer,
-  questions: fromQuestions.questionReducer,
+  infosAppReducer: fromInfosApp.infosAppReducer,
+  questionsReducer: fromQuestions.questionReducer,
   routerReducer: fromRouter.routerReducer
 };
 
@@ -27,17 +27,13 @@ export const getAppState = createFeatureSelector<AppState>('appState');
 
 export const getInfosAppState = createSelector(
   getAppState,
-  (state: AppState) => state.infosApp
+  (state: AppState) => state.infosAppReducer
 );
 
 export const getQuestionsState = createSelector(
   getAppState,
-  (state: AppState) => state.questions
+  (state: AppState) => state.questionsReducer
 );
-
-export const getRouterStateReducer = createFeatureSelector<
-  fromRouter.RouterReducerState<RouterStateUrl>
->('routerReducer');
 
 export const getRouterState = createSelector(
   getAppState,

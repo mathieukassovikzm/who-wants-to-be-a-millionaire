@@ -4,7 +4,6 @@ import { QuestionsActionTypes, QuestionsActions } from '../actions/questions.act
 
 export interface QuestionsState {
   entities: { [id: number]: QuestionModel };
-  currentQuestionId: number;
   jokerFiftyUsed: boolean;
   jokerPublicUsed: boolean;
   jokerCallUsed: boolean;
@@ -15,7 +14,6 @@ export interface QuestionsState {
 // Initial state of the store
 const initialState: QuestionsState = {
   entities: {},
-  currentQuestionId: 0,
   jokerFiftyUsed: false,
   jokerPublicUsed: false,
   jokerCallUsed: false,
@@ -58,12 +56,6 @@ export function questionReducer(
         loading: false,
         loaded: true
       };
-    case QuestionsActionTypes.INCREMENT_QUESTION_ID:
-      const questionId = state.currentQuestionId + 1;
-      return {
-        ...state,
-        currentQuestionId: questionId
-      };
     case QuestionsActionTypes.JOKER_FIFTY_TO_FALSE:
       return {
         ...state,
@@ -85,7 +77,6 @@ export function questionReducer(
 }
 
 export const getQuestionsEntities = (state: QuestionsState) => state.entities;
-export const getQuestionsCurrentQuestionId = (state: QuestionsState) => state.currentQuestionId;
 export const getQuestionsJokerFiftyUsed = (state: QuestionsState) => state.jokerFiftyUsed;
 export const getQuestionsJokerCallUsed = (state: QuestionsState) => state.jokerCallUsed;
 export const getQuestionsJokerPublicUsed = (state: QuestionsState) => state.jokerPublicUsed;

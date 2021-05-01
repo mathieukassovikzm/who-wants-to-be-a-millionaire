@@ -23,7 +23,6 @@ export class RouterEffects {
         tap(({ path, query: queryParams, extras }) => {
           this.router.navigate(path, { queryParams, ...extras });
         }),
-        map(() => new questionsActions.ActIncrementQuestionId),
       ),
     { dispatch: false },
   );

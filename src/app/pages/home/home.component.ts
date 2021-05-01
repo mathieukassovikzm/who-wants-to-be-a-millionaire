@@ -7,7 +7,6 @@ import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import * as fromRouterActions from '@app/store/actions/router.actions';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 
 @Component({
   selector: 'app-home',
@@ -19,30 +18,40 @@ export class HomeComponent implements OnInit, OnDestroy {
   birthday$: Observable<number> = new Observable<number>();
 
   questions$: Observable<QuestionModel[]>;
+  questionId = -1;
   subscription: Subscription;
 
   constructor(public store: Store<fromStore.AppState>, private router: Router, private route: ActivatedRoute) {
-    this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
   }
 
   ngOnInit(): void {
+    this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
+    this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
+    this.questions$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
+
+    this.subscription = this.questions$.subscribe(questionId => {
+
+    });
+
   }
 
   startGame(): void {
-    const currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getQuestionsCurrentQuestionId);
-    this.store.dispatch(new fromQuestionsActions.ActIncrementQuestionId());
-
-    this.subscription = currentQuestion$.subscribe(questionId => {
+    if (this.questionId === -1) {
       this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
         payload: {
-          path: [`/question/${questionId}`],
+          path: [`/question/1`],
           query: {},
-          extras: { queryParams: questionId },
         }
-      }
-      ));
-    });
+      }));
+    } else {
+      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+        payload: {
+          path: [`/question/${this.questionId}`],
+          query: {},
+        }
+      }));
+    }
+
   }
 
   ngOnDestroy(): void {
