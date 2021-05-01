@@ -4,6 +4,8 @@ import { QuestionsActionTypes, QuestionsActions } from '../actions/questions.act
 
 export interface QuestionsState {
   entities: { [id: number]: QuestionModel };
+  answerChosen: number,
+  displayAnswer: boolean,
   jokerFiftyUsed: boolean;
   jokerPublicUsed: boolean;
   jokerCallUsed: boolean;
@@ -14,6 +16,8 @@ export interface QuestionsState {
 // Initial state of the store
 const initialState: QuestionsState = {
   entities: {},
+  answerChosen: -1,
+  displayAnswer: false,
   jokerFiftyUsed: false,
   jokerPublicUsed: false,
   jokerCallUsed: false,
@@ -56,6 +60,27 @@ export function questionReducer(
         loading: false,
         loaded: true
       };
+    case QuestionsActionTypes.SET_ANSWER_CHOSEN:
+      const answerId = action.payload;
+      return {
+        ...state,
+        answerChosen: answerId
+      };
+    case QuestionsActionTypes.RESET_ANSWER_CHOSEN:
+      return {
+        ...state,
+        answerChosen: -1
+      };
+    case QuestionsActionTypes.DISPLAY_ANSWER:
+      return {
+        ...state,
+        displayAnswer: true
+      };
+    case QuestionsActionTypes.HIDE_ANSWER:
+      return {
+        ...state,
+        displayAnswer: false
+      };
     case QuestionsActionTypes.JOKER_FIFTY_TO_FALSE:
       return {
         ...state,
@@ -77,6 +102,8 @@ export function questionReducer(
 }
 
 export const getQuestionsEntities = (state: QuestionsState) => state.entities;
+export const getQuestionsAnswerChosen = (state: QuestionsState) => state.answerChosen;
+export const getQuestionsDisplayAnswer = (state: QuestionsState) => state.displayAnswer;
 export const getQuestionsJokerFiftyUsed = (state: QuestionsState) => state.jokerFiftyUsed;
 export const getQuestionsJokerCallUsed = (state: QuestionsState) => state.jokerCallUsed;
 export const getQuestionsJokerPublicUsed = (state: QuestionsState) => state.jokerPublicUsed;

@@ -1,3 +1,7 @@
+@import "styles";
+
+$answer-good: #0f9d58;
+$answer-wrong: #db4437;
 :host {
   width: 100%;
   display: flex;
@@ -25,6 +29,33 @@
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &.answer-candidate {
+        p {
+          color: $txt-dark;
+        }
+        ::ng-deep {
+          svg path {
+            fill: $secondary;
+          }
+        }
+      }
+      &.answer-wrong {
+        ::ng-deep {
+          svg path {
+            fill: $answer-wrong;
+          }
+        }
+      }
+      &.answer-good {
+        ::ng-deep {
+          svg path {
+            fill: $answer-good;
+          }
+        }
       }
     }
   }

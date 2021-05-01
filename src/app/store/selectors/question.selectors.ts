@@ -32,6 +32,16 @@ export const getCurrentQuestion = createSelector(
   }
 );
 
+export const getQuestionsAnswerChosen = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsAnswerChosen
+);
+
+export const getQuestionsDisplayAnswer = createSelector(
+  getQuestionsState,
+  fromQuestions.getQuestionsDisplayAnswer
+);
+
 export const getQuestionsLoaded = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsLoaded

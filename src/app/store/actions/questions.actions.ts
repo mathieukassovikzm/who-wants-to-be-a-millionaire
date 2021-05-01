@@ -7,6 +7,10 @@ export enum QuestionsActionTypes {
   LOAD_QUESTIONS = '[Questions] Load Questions',
   LOAD_QUESTIONS_FAIL = '[Questions] Load Questions Fail',
   LOAD_QUESTIONS_SUCCESS = '[Questions] Load Questions Success',
+  SET_ANSWER_CHOSEN = '[Questions] Set Answer Chosen',
+  RESET_ANSWER_CHOSEN = '[Questions] Reset Answer Chosen',
+  DISPLAY_ANSWER = '[Questions] Display Answer',
+  HIDE_ANSWER = '[Questions] Hide Answer',
   JOKER_FIFTY_TO_FALSE = '[Questions] Joker Fifty To False',
   JOKER_CALL_TO_FALSE = '[Questions] Joker Call To False',
   JOKER_PUBLIC_TO_FALSE = '[Questions] Joker Public To False',
@@ -26,6 +30,23 @@ export class ActLoadQuestionsSuccess implements Action {
   constructor(public payload: QuestionModel[]) { }
 }
 
+export class ActSetAnswerChosen implements Action {
+  readonly type = QuestionsActionTypes.SET_ANSWER_CHOSEN;
+  constructor(public payload: number) { }
+}
+
+export class ActResetAnswerChosen implements Action {
+  readonly type = QuestionsActionTypes.RESET_ANSWER_CHOSEN;
+}
+
+export class ActDisplayAnswer implements Action {
+  readonly type = QuestionsActionTypes.DISPLAY_ANSWER;
+}
+
+export class ActHideAnswer implements Action {
+  readonly type = QuestionsActionTypes.HIDE_ANSWER;
+}
+
 export class ActJokerFiftyToFalse implements Action {
   readonly type = QuestionsActionTypes.JOKER_FIFTY_TO_FALSE;
 }
@@ -43,6 +64,10 @@ export type QuestionsActions =
   | ActLoadQuestions
   | ActLoadQuestionsFail
   | ActLoadQuestionsSuccess
+  | ActSetAnswerChosen
+  | ActResetAnswerChosen
+  | ActDisplayAnswer
+  | ActHideAnswer
   | ActJokerFiftyToFalse
   | ActJokerCallToFalse
   | ActJokerPublicToFalse;

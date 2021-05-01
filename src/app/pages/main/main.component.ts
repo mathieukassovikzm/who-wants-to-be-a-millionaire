@@ -25,7 +25,10 @@ export class MainComponent implements OnInit, OnDestroy {
   questions$: Observable<QuestionModel[]>;
   currentQuestion$: Observable<QuestionModel>;
   currentQuestionId: number;
-
+  currentAnswer$: Observable<number>;
+  currentAnswer = -1;
+  showAnswer$: Observable<boolean>;
+  showAnswer = false;
   subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>, private router: Router) {
@@ -49,8 +52,20 @@ export class MainComponent implements OnInit, OnDestroy {
       res => this.menuOpened = res
     );
 
+    this.showAnswer$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsDisplayAnswer);
+    const sub3 = this.showAnswer$.subscribe(
+      res => this.showAnswer = res
+    );
+
+    this.currentAnswer$ = this.store.select<number>(fromQuestionsSelectors.getQuestionsAnswerChosen);
+    const sub4 = this.currentAnswer$.subscribe(
+      res => this.currentAnswer = res
+    );
+
     this.subscription.add(sub1);
     this.subscription.add(sub2);
+    this.subscription.add(sub3);
+    this.subscription.add(sub4);
   }
 
   ngOnDestroy(): void {
@@ -62,17 +77,23 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   nextQuestion(): void {
-    this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
-      payload: {
-        path: [`/question/${this.currentQuestionId + 1}`],
-        query: {},
-        extras: {},
-      }
-    }));
+    if (this.showAnswer === true) {
+      this.store.dispatch(new fromStore.ActResetAnswerChosen);
+      this.store.dispatch(new fromStore.ActHideAnswer);
+      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+        payload: {
+          path: [`/question/${this.currentQuestionId + 1}`],
+          query: {},
+          extras: {},
+        }
+      }));
+    }
   }
 
-  showAnswer(): void {
-    console.log('showAnswer');
+  displayAnswer(): void {
+    if (this.currentAnswer !== -1) {
+      this.store.dispatch(new fromStore.ActDisplayAnswer);
+    }
   }
 }
 

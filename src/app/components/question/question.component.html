@@ -1,25 +1,22 @@
-<!-- <app-svg-question></app-svg-question> -->
 <div class="question">
   <p>{{(currentQuestion$|async)?.question}}</p>
   <app-svg-gain></app-svg-gain>
 </div>
 <div class="answers-container">
-  <div class="answer">
+  <div [class]="getClassAnswers(0)" (click)="selectAnswer(0)">
     <app-svg-gain></app-svg-gain>
     <p>{{(currentQuestion$|async)?.answers[0].answer}}</p>
   </div>
-  <div class="answer">
+  <div [class]="getClassAnswers(1)" (click)="selectAnswer(1)">
     <app-svg-gain></app-svg-gain>
     <p>{{(currentQuestion$|async)?.answers[1].answer}}</p>
   </div>
-  <div class="answer">
+  <div [class]="getClassAnswers(2)" (click)="selectAnswer(2)">
     <app-svg-gain></app-svg-gain>
     <p>{{(currentQuestion$|async)?.answers[2].answer}}</p>
   </div>
-  <div class="answer">
+  <div [class]="getClassAnswers(3)" (click)="selectAnswer(3)">
     <app-svg-gain></app-svg-gain>
     <p>{{(currentQuestion$|async)?.answers[3].answer}}</p>
   </div>
 </div>
-
-<!-- {{(currentQuestion$ |async)?.question}} -->
