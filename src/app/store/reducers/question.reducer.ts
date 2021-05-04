@@ -4,8 +4,8 @@ import { QuestionsActionTypes, QuestionsActions } from '../actions/questions.act
 
 export interface QuestionsState {
   entities: { [id: number]: QuestionModel };
-  answerChosen: number,
-  displayAnswer: boolean,
+  answerChosen: number;
+  displayAnswer: boolean;
   jokerFiftyUsed: boolean;
   jokerPublicUsed: boolean;
   jokerCallUsed: boolean;

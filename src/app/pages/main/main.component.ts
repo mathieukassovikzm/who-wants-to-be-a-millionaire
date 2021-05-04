@@ -42,7 +42,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const sub1 = this.currentQuestion$.subscribe(
       question => {
         if (question) {
-          this.currentQuestionId = question.id
+          this.currentQuestionId = question.id;
         }
       }
     );
@@ -78,8 +78,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     if (this.showAnswer === true) {
-      this.store.dispatch(new fromStore.ActResetAnswerChosen);
-      this.store.dispatch(new fromStore.ActHideAnswer);
+      this.store.dispatch(new fromStore.ActResetAnswerChosen());
+      this.store.dispatch(new fromStore.ActHideAnswer());
       this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
         payload: {
           path: [`/question/${this.currentQuestionId + 1}`],
@@ -92,8 +92,22 @@ export class MainComponent implements OnInit, OnDestroy {
 
   displayAnswer(): void {
     if (this.currentAnswer !== -1) {
-      this.store.dispatch(new fromStore.ActDisplayAnswer);
+      this.store.dispatch(new fromStore.ActDisplayAnswer());
     }
+  }
+
+  classBtnAnswer(): string {
+    if (this.currentAnswer === -1) {
+      return 'button button-disabled';
+    } else if (this.currentAnswer !== -1 && this.showAnswer === false) {
+      return 'button';
+    } else {
+      return 'button button-disabled';
+    }
+  }
+
+  classBtnNext(): string {
+    return this.showAnswer === false ? 'button button-disabled' : 'button';
   }
 }
 

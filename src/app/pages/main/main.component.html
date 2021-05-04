@@ -7,8 +7,8 @@
       <app-svg-circle-gain></app-svg-circle-gain>
     </div>
     <div class="section-buttons">
-      <app-button class="button" (click)="displayAnswer()">Réponse</app-button>
-      <app-button class="button" (click)="nextQuestion()">Next</app-button>
+      <app-button [class]="classBtnAnswer()" (click)="displayAnswer()">Réponse</app-button>
+      <app-button [class]="classBtnNext()" (click)="nextQuestion()">Next</app-button>
     </div>
   </div>
 </section>

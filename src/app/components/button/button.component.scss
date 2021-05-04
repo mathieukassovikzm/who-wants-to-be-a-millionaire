@@ -3,36 +3,54 @@
 $pyramid-height: 50px;
 
 :host {
-  .button {
+  position: relative;
+  height: $pyramid-height;
+  .btn-txt {
     position: relative;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    height: $pyramid-height;
-    .btn-txt {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      z-index: 2;
-    }
-    .svg-gain {
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      ::ng-deep {
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+    transition: all $anim-duration ease;
+  }
+  .svg-gain {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    ::ng-deep {
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        path {
+          transition: all $anim-duration ease;
         }
       }
     }
-    transition: all $anim-duration ease;
+  }
+  transition: all $anim-duration ease;
 
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  &.button-disabled {
+    .btn-txt {
+      color: $txt-disabled;
+    }
+    .svg-gain {
+      ::ng-deep {
+        svg {
+          path {
+            fill: $bkg-disabled;
+          }
+        }
+      }
+    }
     &:hover {
-      cursor: pointer;
-      transform: translateX(-50%) scale(1.1);
+      cursor: inherit;
+      transform: none;
     }
   }
 }
