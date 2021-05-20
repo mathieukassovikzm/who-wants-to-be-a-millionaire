@@ -32,6 +32,13 @@ export const getCurrentQuestion = createSelector(
   }
 );
 
+export const getQuestionId = createSelector(
+  getRouterState,
+  (router: fromRouter.RouterReducerState<RouterStateUrl>) => {
+    return router.state.params.questionId
+  }
+);
+
 export const getQuestionsAnswerChosen = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsAnswerChosen

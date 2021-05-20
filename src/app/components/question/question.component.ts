@@ -7,6 +7,7 @@ import * as fromStore from '@app/store/index';
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import {
   SvgGainModule,
+  SvgLosangeModule
 } from '@app/components/svgs';
 
 @Component({
@@ -21,6 +22,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   currentAnswer = -1;
   showAnswer$: Observable<boolean>;
   showAnswer = false;
+  jokerFiftyUsed$: Observable<boolean>;
+  jokerFiftyUsed = false;
   subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>) {
@@ -28,19 +31,14 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentQuestion$ = this.store.select<QuestionModel>(fromQuestionsSelectors.getCurrentQuestion);
-    const sub1 = this.currentQuestion$.subscribe(
-      res => this.currentQuestion = res
-    );
+    const sub1 = this.currentQuestion$.subscribe(res => this.currentQuestion = res);
 
     this.currentAnswer$ = this.store.select<number>(fromQuestionsSelectors.getQuestionsAnswerChosen);
-    const sub2 = this.currentAnswer$.subscribe(
-      res => this.currentAnswer = res
-    );
+    const sub2 = this.currentAnswer$.subscribe(res => this.currentAnswer = res);
 
     this.showAnswer$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsDisplayAnswer);
-    const sub3 = this.showAnswer$.subscribe(
-      res => this.showAnswer = res
-    );
+    const sub3 = this.showAnswer$.subscribe(res => this.showAnswer = res);
+
     this.subscription.add(sub1);
     this.subscription.add(sub2);
     this.subscription.add(sub3);
@@ -73,7 +71,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   declarations: [QuestionComponent],
   imports: [
     CommonModule,
-    SvgGainModule
+    SvgGainModule,
+    SvgLosangeModule
   ],
   exports: [QuestionComponent]
 })

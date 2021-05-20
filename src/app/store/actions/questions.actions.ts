@@ -49,6 +49,7 @@ export class ActHideAnswer implements Action {
 
 export class ActJokerFiftyToFalse implements Action {
   readonly type = QuestionsActionTypes.JOKER_FIFTY_TO_FALSE;
+  constructor(public payload: number) { }
 }
 
 export class ActJokerCallToFalse implements Action {

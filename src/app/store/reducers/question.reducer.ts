@@ -82,8 +82,41 @@ export function questionReducer(
         displayAnswer: false
       };
     case QuestionsActionTypes.JOKER_FIFTY_TO_FALSE:
+      const newEntities = action.payload;
+      // let newEntities = [...state.entities];
+      // let newVisiblesAnswers = [...currentQuestion.answers];
+
+      // let randomIndex1 = -1;
+      // let randomIndex2 = -1;
+      // do {
+      //   randomIndex1 = getRandomInt(4);
+      // } while (randomIndex1 === currentQuestion.goodAnswer);
+      // newVisiblesAnswers[randomIndex1].visible = false;
+
+      // do {
+      //   randomIndex2 = getRandomInt(4);
+      // } while (randomIndex2 === currentQuestion.goodAnswer || randomIndex2 === randomIndex1);
+      // newVisiblesAnswers[randomIndex2].visible = false;
+
+
+      // let newEntities = { ...state.entities };
+      // const answers = currentQuestion.answers.filter(a => a.answer === badAnswers[0].answer || a.id === currentQuestion.goodAnswer);
+
+
+
+      // let badAnswers = [...currentQuestion.answers];
+      // badAnswers.splice(currentQuestion.goodAnswer, 1);
+
+
+      // badAnswers.splice(getRandomInt(3), 1);
+      // badAnswers.splice(getRandomInt(2), 1);
+
+      // let newEntities = { ...state.entities };
+      // const answers = currentQuestion.answers.filter(a => a.answer === badAnswers[0].answer || a.id === currentQuestion.goodAnswer);
+
       return {
         ...state,
+        // entities: newEntities,
         jokerFiftyUsed: true
       };
     case QuestionsActionTypes.JOKER_CALL_TO_FALSE:
