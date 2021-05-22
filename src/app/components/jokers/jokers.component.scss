@@ -8,6 +8,10 @@
           .cls-4.cross {
             display: block;
           }
+          &:hover {
+            cursor: inherit;
+            transform: scale(1);
+          }
         }
       }
     }

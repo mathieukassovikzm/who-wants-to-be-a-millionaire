@@ -4,6 +4,7 @@ import { getQuestionsState, RouterStateUrl } from './../reducers/index';
 import * as fromQuestions from './../reducers/question.reducer';
 import * as fromRouter from '@ngrx/router-store';
 import { getRouterState } from './../reducers/index';
+import { QuestionEntity } from '@app/models/question-entity';
 
 export const getQuestionsEntities = createSelector(
   getQuestionsState,
@@ -13,22 +14,23 @@ export const getQuestionsEntities = createSelector(
 export const getAllQuestions = createSelector(
   getQuestionsEntities,
   (entities) => {
-    return Object.keys(entities).map(id => entities[parseInt(id, 10)]);
+    return entities.lstQuestions && Object.keys(entities.lstQuestions).map(id => entities.lstQuestions[parseInt(id, 10)]);
   }
 );
 
 export const getAllQuestionsReverse = createSelector(
   getQuestionsEntities,
   (entities) => {
-    return Object.keys(entities).map(id => entities[parseInt(id, 10)]).reverse();
+    return entities.lstQuestions && Object.keys(entities.lstQuestions).map(id => entities.lstQuestions[parseInt(id, 10)]).reverse();
   }
 );
 
 export const getCurrentQuestion = createSelector(
   getQuestionsEntities,
   getRouterState,
-  (entities: { [id: number]: QuestionModel }, router: fromRouter.RouterReducerState<RouterStateUrl>): QuestionModel => {
-    return router.state && entities[router.state.params.questionId];
+  (entities: QuestionEntity, router: fromRouter.RouterReducerState<RouterStateUrl>): QuestionModel => {
+    let index = router.state.params.questionId as number;
+    return router.state && entities.lstQuestions && entities.lstQuestions[index];
   }
 );
 

@@ -5,7 +5,7 @@
 <div class="answers-container">
   <div [class]="getClassAnswers(0)" (click)="selectAnswer(0)">
     <app-svg-gain></app-svg-gain>
-    <div class="answer-txt">
+    <div class="answer-txt" *ngIf="(currentQuestion$|async)?.answers[0].visible">
       <app-svg-losange></app-svg-losange>
       <p class="letter">A:</p>
       <p>{{(currentQuestion$|async)?.answers[0].answer}}</p>
@@ -13,7 +13,7 @@
   </div>
   <div [class]="getClassAnswers(1)" (click)="selectAnswer(1)">
     <app-svg-gain></app-svg-gain>
-    <div class="answer-txt">
+    <div class="answer-txt" *ngIf="(currentQuestion$|async)?.answers[1].visible">
       <app-svg-losange></app-svg-losange>
       <p class="letter">B:</p>
       <p>{{(currentQuestion$|async)?.answers[1].answer}}</p>
@@ -21,7 +21,7 @@
   </div>
   <div [class]="getClassAnswers(2)" (click)="selectAnswer(2)">
     <app-svg-gain></app-svg-gain>
-    <div class="answer-txt">
+    <div class="answer-txt" *ngIf="(currentQuestion$|async)?.answers[2].visible">
       <app-svg-losange></app-svg-losange>
       <p class="letter">C:</p>
       <p>{{(currentQuestion$|async)?.answers[2].answer}}</p>
@@ -29,7 +29,7 @@
   </div>
   <div [class]="getClassAnswers(3)" (click)="selectAnswer(3)">
     <app-svg-gain></app-svg-gain>
-    <div class="answer-txt">
+    <div class="answer-txt" *ngIf="(currentQuestion$|async)?.answers[3].visible">
       <app-svg-losange></app-svg-losange>
       <p class="letter">D:</p>
       <p>{{(currentQuestion$|async)?.answers[3].answer}}</p>

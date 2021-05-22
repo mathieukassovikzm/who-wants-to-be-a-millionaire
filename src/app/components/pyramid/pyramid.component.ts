@@ -20,9 +20,10 @@ import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors
 })
 export class PyramidComponent implements OnInit, OnDestroy {
   questions$: Observable<QuestionModel[]>;
+  questions: QuestionModel[];
   currentQuestion$: Observable<QuestionModel>;
   currentQuestionId: number;
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>) {
     this.questions$ = this.store.select<QuestionModel[]>(fromQuestions.getAllQuestionsReverse);
@@ -30,13 +31,24 @@ export class PyramidComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.currentQuestion$.subscribe(
+    const sub1 = this.questions$.subscribe(
+      res => {
+        if (res) {
+          this.questions = res
+        }
+      }
+    );
+
+    const sub2 = this.currentQuestion$.subscribe(
       question => {
         if (question) {
           this.currentQuestionId = question.id
         }
       }
     );
+
+    this.subscription.add(sub1);
+    this.subscription.add(sub2);
   }
 
   ngOnDestroy(): void {

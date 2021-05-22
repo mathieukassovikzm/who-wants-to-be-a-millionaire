@@ -12,6 +12,7 @@ import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import { QuestionModel } from '@app/models/question-model';
 import { AnswerModel } from '@app/models/answer-model';
+import { QuestionEntity } from '@app/models/question-entity';
 
 @Component({
   selector: 'app-jokers',
@@ -27,8 +28,8 @@ export class JokersComponent implements OnInit, OnDestroy {
   usedJokerPublic: boolean = false;
   questionId$: Observable<number> = new Observable<number>();
   questionId: number = 0;
-  questionsEntity$: Observable<{ [id: number]: QuestionModel }> = new Observable<{ [id: number]: QuestionModel }>();
-  questionsEntity: { [id: number]: QuestionModel };
+  questionsEntity$: Observable<QuestionEntity> = new Observable<QuestionEntity>();
+  questionsEntity: QuestionEntity;
   subscription: Subscription = new Subscription();
 
   constructor(public store: Store<fromStore.AppState>) {
@@ -36,8 +37,7 @@ export class JokersComponent implements OnInit, OnDestroy {
     this.usedJokerCall$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsJokerCallUsed);
     this.usedJokerPublic$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsJokerPublicUsed);
     this.questionId$ = this.store.select<number>(fromQuestionsSelectors.getQuestionId);
-    this.questionsEntity$ = this.store.select<{ [id: number]: QuestionModel }>(fromQuestionsSelectors.getQuestionsEntities);
-
+    this.questionsEntity$ = this.store.select<QuestionEntity>(fromQuestionsSelectors.getQuestionsEntities);
   }
 
   ngOnInit(): void {
@@ -58,61 +58,20 @@ export class JokersComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-
-  getRandomInt(max): number {
-    return Math.floor(Math.random() * max);
-  }
-
   useJokerFifty(): void {
-    const currentQuestion = this.questionsEntity[this.questionId];
-    console.log(this.questionsEntity[this.questionId].answers);
-
-    let randomIndex1 = -1;
-    let randomIndex2 = -1;
-    do {
-      randomIndex1 = this.getRandomInt(4);
-    } while (randomIndex1 === currentQuestion.goodAnswer);
-
-    let a1 = {
-      ...this.questionsEntity[this.questionId].answers[randomIndex1],
-      visible: false
+    if (this.usedJokerFifty === false) {
+      this.store.dispatch(new fromQuestionsActions.ActJokerFiftyToFalse(this.questionId));
     }
-    // console.log(a1);
-    // a1 = {
-    //   ...a1,
-    //   visible: true
-    // }
-    // console.log(a1);
-    // this.questionsEntity[this.questionId].answers[randomIndex1] = a1;
-
-    console.log(randomIndex1);
-    this.questionsEntity[this.questionId].answers.map(
-      (answer: AnswerModel) =>
-        answer.id === randomIndex1 ? { ...answer } : { ...answer }
-      // answer.id === randomIndex1 ? { ...answer, visible: false } : { ...answer, visible: false }
-    );
-
-
-    console.log(this.questionsEntity[this.questionId].answers);
-
-    // this.questionsEntity[this.questionId].answers[randomIndex1].visible = false;
-
-    // do {
-    //   randomIndex2 = this.getRandomInt(4);
-    // } while (randomIndex2 === currentQuestion.goodAnswer || randomIndex2 === randomIndex1);
-    // this.questionsEntity[this.questionId].answers[randomIndex2].visible = false;
-    // console.log(this.questionsEntity[this.questionId].answers);
-
-
-
-
-    this.store.dispatch(new fromQuestionsActions.ActJokerFiftyToFalse(this.questionId));
   }
   useJokerCall(): void {
-    this.store.dispatch(new fromQuestionsActions.ActJokerCallToFalse());
+    if (this.usedJokerCall === false) {
+      this.store.dispatch(new fromQuestionsActions.ActJokerCallToFalse());
+    }
   }
   useJokerPublic(): void {
-    this.store.dispatch(new fromQuestionsActions.ActJokerPublicToFalse());
+    if (this.usedJokerPublic === false) {
+      this.store.dispatch(new fromQuestionsActions.ActJokerPublicToFalse());
+    }
   }
 
   getClassFifty(): string {

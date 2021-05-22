@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.questionId === -1) {
       this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
         payload: {
-          path: [`/question/1`],
+          path: [`/question/0`],
           query: {},
         }
       }));
