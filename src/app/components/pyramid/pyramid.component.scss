@@ -28,6 +28,20 @@ $pyramid-height: 25px;
               fill: $txt-light;
             }
           }
+          &.answer-right {
+            ::ng-deep {
+              svg polygon {
+                fill: $answer-good;
+              }
+            }
+          }
+          &.answer-wrong {
+            ::ng-deep {
+              svg polygon {
+                fill: $answer-wrong;
+              }
+            }
+          }
         }
         .txt-gain {
           justify-self: start;

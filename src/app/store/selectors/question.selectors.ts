@@ -41,6 +41,18 @@ export const getQuestionId = createSelector(
   }
 );
 
+export const getQuestion = (id: number) => createSelector(
+  getQuestionsEntities,
+  (entities: QuestionEntity): QuestionModel => {
+    return entities.lstQuestions && entities.lstQuestions[id];
+  }
+);
+
+export const getGoodAnswerOfQuestion = (id: number) => createSelector(
+  getQuestion(id),
+  (question) => question.goodAnswer
+);
+
 export const getQuestionsAnswerChosen = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsAnswerChosen

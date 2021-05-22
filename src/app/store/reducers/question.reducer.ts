@@ -83,6 +83,42 @@ export function questionReducer(
         ...state,
         answerChosen: answerId
       };
+    case QuestionsActionTypes.SET_QUESTION_ANSWER_RIGHT:
+      let newEntityQtRight = {} as QuestionEntity;
+      newEntityQtRight.lstQuestions = Object.keys(state.entities.lstQuestions).map(
+        id => {
+          if (state.entities.lstQuestions[parseInt(id, 10)].id == action.payload) {
+            return {
+              ...state.entities.lstQuestions[action.payload],
+              goodAnswer: true
+            };
+          } else {
+            return state.entities.lstQuestions[parseInt(id, 10)];
+          }
+        }
+      );
+      return {
+        ...state,
+        entities: newEntityQtRight,
+      };
+    case QuestionsActionTypes.SET_QUESTION_ANSWER_WRONG:
+      let newEntityQtWrong = {} as QuestionEntity;
+      newEntityQtWrong.lstQuestions = Object.keys(state.entities.lstQuestions).map(
+        id => {
+          if (state.entities.lstQuestions[parseInt(id, 10)].id == action.payload) {
+            return {
+              ...state.entities.lstQuestions[action.payload],
+              goodAnswer: false
+            };
+          } else {
+            return state.entities.lstQuestions[parseInt(id, 10)];
+          }
+        }
+      );
+      return {
+        ...state,
+        entities: newEntityQtWrong,
+      };
     case QuestionsActionTypes.RESET_ANSWER_CHOSEN:
       return {
         ...state,
@@ -107,7 +143,7 @@ export function questionReducer(
       let randomIndex1 = -1;
       do {
         randomIndex1 = getRandomInt(4);
-      } while (randomIndex1 === currentQuestionMdf.goodAnswer);
+      } while (randomIndex1 === currentQuestionMdf.correctAnswer);
       // Get first index to hide
       let answersCopy = currentQuestionMdf.answers.map(
         (answer: AnswerModel) => {
@@ -121,7 +157,7 @@ export function questionReducer(
       let randomIndex2 = -1;
       do {
         randomIndex2 = getRandomInt(4);
-      } while (randomIndex2 === currentQuestionMdf.goodAnswer || randomIndex2 === randomIndex1);
+      } while (randomIndex2 === currentQuestionMdf.correctAnswer || randomIndex2 === randomIndex1);
       answersCopy = answersCopy.map(
         (answer: AnswerModel) => {
           if (answer.id === randomIndex2) {

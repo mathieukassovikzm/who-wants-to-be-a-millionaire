@@ -16,7 +16,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Madael', visible: true },
           { id: 2, answer: 'Le Titanic', visible: true },
           { id: 3, answer: 'Lelali', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       },
       {
         id: 1,
@@ -27,7 +27,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Damien', visible: true },
           { id: 2, answer: 'Mathieu', visible: true },
           { id: 3, answer: 'Winni', visible: true }],
-        goodAnswer: 3
+        correctAnswer: 3
       }, {
         id: 2,
         gain: 300,
@@ -37,7 +37,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Le bar', visible: true },
           { id: 2, answer: 'Le maquereau', visible: true },
           { id: 3, answer: 'Le poisson panné', visible: true }],
-        goodAnswer: 0
+        correctAnswer: 0
       }, {
         id: 3,
         gain: 500,
@@ -47,7 +47,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: '12', visible: true },
           { id: 2, answer: '13', visible: true },
           { id: 3, answer: '14', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 4,
         gain: 1000,
@@ -57,7 +57,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Jérome Fernandez', visible: true },
           { id: 2, answer: 'Frederic Folle', visible: true },
           { id: 3, answer: 'Nikola Karabatic', visible: true }],
-        goodAnswer: 1
+        correctAnswer: 1
       }, {
         id: 5,
         gain: 2000,
@@ -67,7 +67,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: '1992', visible: true },
           { id: 2, answer: '1996', visible: true },
           { id: 3, answer: '1997', visible: true }],
-        goodAnswer: 0
+        correctAnswer: 0
       }, {
         id: 6,
         gain: 8000,
@@ -77,7 +77,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Saint Emilions', visible: true },
           { id: 2, answer: 'Château Lafite', visible: true },
           { id: 3, answer: 'Dom Pérignon', visible: true }],
-        goodAnswer: 3
+        correctAnswer: 3
       }, {
         id: 7,
         gain: 12000,
@@ -87,7 +87,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Franck Dubosc', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'Elie Semoun', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 8,
         gain: 12000,
@@ -97,7 +97,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: '13 Février 2020', visible: true },
           { id: 2, answer: '20 Février 2020', visible: true },
           { id: 3, answer: '27 Février 2020', visible: true }],
-        goodAnswer: 1
+        correctAnswer: 1
       }, {
         id: 9,
         gain: 24000,
@@ -107,7 +107,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'answer B', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'answer D', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 10,
         gain: 36000,
@@ -117,7 +117,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'answer B', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'answer D', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 11,
         gain: 72000,
@@ -127,7 +127,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'answer B', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'answer D', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 12,
         gain: 150000,
@@ -137,7 +137,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'answer B', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'answer D', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 13,
         gain: 300000,
@@ -147,7 +147,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'answer B', visible: true },
           { id: 2, answer: 'answer C', visible: true },
           { id: 3, answer: 'answer D', visible: true }],
-        goodAnswer: 2
+        correctAnswer: 2
       }, {
         id: 14,
         gain: 1000000,
@@ -157,7 +157,7 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 1, answer: 'Un livre de vin', visible: true },
           { id: 2, answer: 'Bureau de travail', visible: true },
           { id: 3, answer: 'Meuble de rangement', visible: true }],
-        goodAnswer: 1
+        correctAnswer: 1
       }
     ];
     return { questions };

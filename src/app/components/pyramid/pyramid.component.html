@@ -3,7 +3,7 @@
     <app-svg-gain class="svg-gain"></app-svg-gain>
     <div class="item-txt">
       <p class="txt-id">{{ step.id }}</p>
-      <app-svg-losange class="txt-dot"></app-svg-losange>
+      <app-svg-losange [class]="getClassDot(step.id)"></app-svg-losange>
       <p class="txt-gain">€{{ step.gain }}</p>
     </div>
   </li>

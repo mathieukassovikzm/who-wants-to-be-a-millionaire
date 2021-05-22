@@ -24,7 +24,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   questions$: Observable<QuestionModel[]>;
   currentQuestion$: Observable<QuestionModel>;
-  currentQuestionId: number;
+  currentQuestion: QuestionModel;
   currentAnswer$: Observable<number>;
   currentAnswer = -1;
   showAnswer$: Observable<boolean>;
@@ -41,9 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
     const sub1 = this.currentQuestion$.subscribe(
       question => {
-        if (question) {
-          this.currentQuestionId = question.id;
-        }
+        this.currentQuestion = question
       }
     );
 
@@ -82,7 +80,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.store.dispatch(new fromStore.ActHideAnswer());
       this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
         payload: {
-          path: [`/question/${this.currentQuestionId + 1}`],
+          path: [`/question/${this.currentQuestion.id + 1}`],
           query: {},
           extras: {},
         }
@@ -93,6 +91,11 @@ export class MainComponent implements OnInit, OnDestroy {
   displayAnswer(): void {
     if (this.currentAnswer !== -1) {
       this.store.dispatch(new fromStore.ActDisplayAnswer());
+      if (this.currentAnswer === this.currentQuestion.correctAnswer) {
+        this.store.dispatch(new fromStore.ActSetQuestionAnswerRight(this.currentQuestion.id));
+      } else {
+        this.store.dispatch(new fromStore.ActSetQuestionAnswerWrong(this.currentQuestion.id));
+      }
     }
   }
 

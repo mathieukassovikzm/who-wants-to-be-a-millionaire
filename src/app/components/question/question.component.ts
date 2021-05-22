@@ -49,7 +49,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   selectAnswer(answerId: number): void {
-    this.store.dispatch(new fromStore.ActSetAnswerChosen(answerId))
+    this.store.dispatch(new fromStore.ActSetAnswerChosen(answerId));
   }
 
   getClassAnswers(answerId): string {
@@ -57,9 +57,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
       return 'answer answer-candidate';
     } else if (this.showAnswer === false && this.currentAnswer !== answerId) {
       return 'answer';
-    } else if (this.showAnswer === true && this.currentQuestion.goodAnswer === answerId) {
+    } else if (this.showAnswer === true && this.currentQuestion.correctAnswer === answerId) {
       return 'answer answer-good';
-    } else if (this.showAnswer === true && this.currentAnswer === answerId && this.currentAnswer !== this.currentQuestion.goodAnswer) {
+    } else if (this.showAnswer === true && this.currentAnswer === answerId && this.currentAnswer !== this.currentQuestion.correctAnswer) {
       return 'answer answer-wrong';
     } else {
       return 'answer';
