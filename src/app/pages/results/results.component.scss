@@ -1,0 +1,52 @@
+@import "styles";
+
+:host {
+  .result-section {
+    position: relative;
+    height: 100vh;
+    .top {
+      position: relative;
+      padding-top: 10px;
+      font-weight: bold;
+      font-size: 2.2em;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        transform: translateX(-50%);
+        border: 1px solid $txt-light;
+        width: 30%;
+      }
+    }
+    .section-center {
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      height: 100%;
+      .left,
+      .right {
+        width: 50%;
+        .left-container,
+        .right-container {
+          position: relative;
+          top: 40%;
+          transform: translateY(-50%);
+        }
+      }
+      .left {
+        .logo {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          max-height: 300px;
+        }
+      }
+      .right .section-pyramid {
+        position: relative;
+        left: 40%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}

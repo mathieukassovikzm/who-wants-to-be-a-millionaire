@@ -48,23 +48,27 @@ export class PyramidComponent implements OnInit, OnDestroy {
   }
 
   getClass(index: number): string {
-    if (index === this.currentQuestion.id && this.isStage(index)) {
-      return 'item item-active item-stage';
-    }
-    else if (index === this.currentQuestion.id && !this.isStage(index)) {
-      return 'item item-active ';
-    }
-    else if (index < this.currentQuestion.id && this.isStage(index)) {
-      return 'item item-passed item-stage';
-    }
-    else if (index < this.currentQuestion.id && !this.isStage(index)) {
+    if (this.currentQuestion) {
+      if (index === this.currentQuestion.id && this.isStage(index)) {
+        return 'item item-active item-stage';
+      }
+      else if (index === this.currentQuestion.id && !this.isStage(index)) {
+        return 'item item-active ';
+      }
+      else if (index < this.currentQuestion.id && this.isStage(index)) {
+        return 'item item-passed item-stage';
+      }
+      else if (index < this.currentQuestion.id && !this.isStage(index)) {
+        return 'item item-passed';
+      }
+      else if (index > this.currentQuestion.id && this.isStage(index)) {
+        return 'item item-stage';
+      }
+      else {
+        return 'item';
+      }
+    } else {
       return 'item item-passed';
-    }
-    else if (index > this.currentQuestion.id && this.isStage(index)) {
-      return 'item item-stage';
-    }
-    else {
-      return 'item';
     }
   }
   getClassDot(index: number): string {

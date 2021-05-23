@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void { }
 
   goToHome(): void {
-    this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+    this.store.dispatch(fromRouterActions.ActRouterNavigation({
       payload: {
         path: [`/home`],
         query: {},

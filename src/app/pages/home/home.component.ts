@@ -15,9 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<number> = new Observable<number>();
+  birthday$: Observable<string> = new Observable<string>();
 
-  questions$: Observable<QuestionModel[]>;
+  question$: Observable<QuestionModel>;
   questionId = -1;
   subscription: Subscription;
 
@@ -25,26 +25,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
-    this.questions$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
-
-    this.subscription = this.questions$.subscribe(questionId => {
-
-    });
-
+    this.title$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppTitle);
+    this.birthday$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppCurrentYear);
+    this.question$ = this.store.select<QuestionModel>(fromQuestionsSelectors.getCurrentQuestion);
   }
 
   startGame(): void {
+    this.subscription = this.question$.subscribe(question => {
+      if (question) {
+        this.questionId = question.id
+      }
+    });
+
     if (this.questionId === -1) {
-      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+      this.store.dispatch(fromRouterActions.ActRouterNavigation({
         payload: {
           path: [`/question/0`],
           query: {},
         }
       }));
     } else {
-      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+      this.store.dispatch(fromRouterActions.ActRouterNavigation({
         payload: {
           path: [`/question/${this.questionId}`],
           query: {},

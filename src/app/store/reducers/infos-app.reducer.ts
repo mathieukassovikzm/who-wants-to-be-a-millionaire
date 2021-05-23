@@ -3,14 +3,14 @@ import { InfosAppActionTypes, InfosAppActions } from '../actions/infos-app.actio
 
 export interface InfosAppState {
   title: string;
-  currentYear: number;
+  currentYear: string;
   menuOpened: boolean;
 }
 
 // Initial state of the store
 const initialState: InfosAppState = {
   title: 'Annif Papa',
-  currentYear: new Date().getFullYear(),
+  currentYear: '58 ans',
   menuOpened: false
 };
 

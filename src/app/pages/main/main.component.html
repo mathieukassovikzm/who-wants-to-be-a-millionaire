@@ -8,7 +8,8 @@
     </div>
     <div class="section-buttons">
       <app-button [class]="classBtnAnswer()" (click)="displayAnswer()">Réponse</app-button>
-      <app-button [class]="classBtnNext()" (click)="nextQuestion()">Next</app-button>
+      <app-button *ngIf="showNext()" [class]="classBtnNext()" (click)="nextQuestion()">Next</app-button>
+      <app-button *ngIf="showResult()" [class]="classBtnNext()" (click)="toResult()">Resultats</app-button>
     </div>
   </div>
 </section>

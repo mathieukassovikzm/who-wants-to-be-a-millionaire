@@ -15,6 +15,12 @@ const routes: Routes = [
         .then(m => m.MainModule),
   },
   {
+    path: 'results',
+    loadChildren: () =>
+      import('@app/pages/results/results.module')
+        .then(m => m.ResultsModule),
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }

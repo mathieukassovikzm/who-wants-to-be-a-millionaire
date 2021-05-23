@@ -18,7 +18,7 @@ export class RouterEffects {
   navigate$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(RouterActions.ActGoToNextQuestion),
+        ofType(RouterActions.ActRouterNavigation),
         map((action) => action.payload),
         tap(({ path, query: queryParams, extras }) => {
           this.router.navigate(path, { queryParams, ...extras });

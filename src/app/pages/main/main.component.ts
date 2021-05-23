@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { } from '@ngrx/router-store';
 
 import * as fromStore from '@app/store/index';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 import * as fromRouterActions from '@app/store/actions/router.actions';
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
@@ -78,9 +77,21 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.showAnswer === true) {
       this.store.dispatch(new fromStore.ActResetAnswerChosen());
       this.store.dispatch(new fromStore.ActHideAnswer());
-      this.store.dispatch(fromRouterActions.ActGoToNextQuestion({
+      this.store.dispatch(fromRouterActions.ActRouterNavigation({
         payload: {
           path: [`/question/${this.currentQuestion.id + 1}`],
+          query: {},
+          extras: {},
+        }
+      }));
+    }
+  }
+
+  toResult(): void {
+    if (this.showAnswer === true) {
+      this.store.dispatch(fromRouterActions.ActRouterNavigation({
+        payload: {
+          path: [`/results`],
           query: {},
           extras: {},
         }
@@ -111,6 +122,14 @@ export class MainComponent implements OnInit, OnDestroy {
 
   classBtnNext(): string {
     return this.showAnswer === false ? 'button button-disabled' : 'button';
+  }
+
+  showNext(): boolean {
+    return this.currentQuestion && this.currentQuestion.id < 14 ? true : false;
+  }
+
+  showResult(): boolean {
+    return this.currentQuestion && this.currentQuestion.id === 14 ? true : false;
   }
 }
 

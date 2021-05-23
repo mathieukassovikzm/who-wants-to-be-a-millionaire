@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { getInfosAppState } from './../reducers/index';
 import * as fromInfosApp from './../reducers/infos-app.reducer';
 

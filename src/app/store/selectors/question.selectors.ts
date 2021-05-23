@@ -53,6 +53,17 @@ export const getGoodAnswerOfQuestion = (id: number) => createSelector(
   (question) => question.goodAnswer
 );
 
+export const getAllGoodAnsweredQuestions = createSelector(
+  getAllQuestions,
+  (lstQt) => {
+    if (lstQt) {
+      return lstQt && lstQt.filter(qt => qt.goodAnswer === true)
+    } else {
+      return {} as QuestionModel[];
+    }
+  }
+);
+
 export const getQuestionsAnswerChosen = createSelector(
   getQuestionsState,
   fromQuestions.getQuestionsAnswerChosen
