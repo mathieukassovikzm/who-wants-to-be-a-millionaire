@@ -121,13 +121,13 @@ export class InMemoryDataService implements InMemoryDbService {
       }, {
         id: 11,
         gain: 72000,
-        question: 'Question 12',
+        question: 'Dans quel comping elween a pris sa première cuite ?',
         answers: [
-          { id: 0, answer: 'answer A', visible: true },
-          { id: 1, answer: 'answer B', visible: true },
-          { id: 2, answer: 'answer C', visible: true },
-          { id: 3, answer: 'answer D', visible: true }],
-        correctAnswer: 2
+          { id: 0, answer: 'Camping torre del sol', visible: true },
+          { id: 1, answer: 'Camping de kerabus', visible: true },
+          { id: 2, answer: 'Camping la ferme de villeneuve', visible: true },
+          { id: 3, answer: 'Camping APV Au Val de Loire en Ré', visible: true }],
+        correctAnswer: 0
       }, {
         id: 12,
         gain: 150000,
@@ -141,12 +141,12 @@ export class InMemoryDataService implements InMemoryDbService {
       }, {
         id: 13,
         gain: 300000,
-        question: 'Question 14',
+        question: 'Combien de pays Mathieu a t\'il visité?',
         answers: [
-          { id: 0, answer: 'answer A', visible: true },
-          { id: 1, answer: 'answer B', visible: true },
-          { id: 2, answer: 'answer C', visible: true },
-          { id: 3, answer: 'answer D', visible: true }],
+          { id: 0, answer: '26', visible: true },
+          { id: 1, answer: '28', visible: true },
+          { id: 2, answer: '30', visible: true },
+          { id: 3, answer: '32', visible: true }],
         correctAnswer: 2
       }, {
         id: 14,

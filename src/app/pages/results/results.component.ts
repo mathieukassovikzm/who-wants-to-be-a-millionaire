@@ -36,7 +36,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
       lst => {
         this.lstGoodAnswers = lst;
 
-
         if (this.lstGoodAnswers && this.lstGoodAnswers.length > 0) {
           this.nbGoodAnswers = this.lstGoodAnswers.length;
           this.lstGoodAnswers.forEach(goodAnswer => {
