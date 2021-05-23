@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
         answers: [
           { id: 0, answer: 'Christophe Alévêque', visible: true },
           { id: 1, answer: 'Franck Dubosc', visible: true },
-          { id: 2, answer: 'answer C', visible: true },
+          { id: 2, answer: 'Benoît Poelvoorde', visible: true },
           { id: 3, answer: 'Elie Semoun', visible: true }],
         correctAnswer: 2
       }, {
@@ -111,7 +111,7 @@ export class InMemoryDataService implements InMemoryDbService {
       }, {
         id: 10,
         gain: 36000,
-        question: 'Question 11',
+        question: '',
         answers: [
           { id: 0, answer: 'answer A', visible: true },
           { id: 1, answer: 'answer B', visible: true },
@@ -131,13 +131,13 @@ export class InMemoryDataService implements InMemoryDbService {
       }, {
         id: 12,
         gain: 150000,
-        question: 'Question 13',
+        question: 'Quel artiste as-tu vue en concert à Morlaix avec Damien ?',
         answers: [
-          { id: 0, answer: 'answer A', visible: true },
-          { id: 1, answer: 'answer B', visible: true },
-          { id: 2, answer: 'answer C', visible: true },
-          { id: 3, answer: 'answer D', visible: true }],
-        correctAnswer: 2
+          { id: 0, answer: 'Indochine', visible: true },
+          { id: 1, answer: 'Mickey 3D', visible: true },
+          { id: 2, answer: 'Shaka Ponk', visible: true },
+          { id: 3, answer: 'Manu chao', visible: true }],
+        correctAnswer: 1
       }, {
         id: 13,
         gain: 300000,
