@@ -5,7 +5,7 @@ $pyramid-height: 25px;
   .pyramid {
     .item {
       position: relative;
-      width: $pyramid-width;
+      width: 100%;
       height: $pyramid-height;
       .item-txt {
         position: relative;

@@ -1,5 +1,7 @@
-<div>
-  <app-svg-euro (click)="togglePyramid()"></app-svg-euro>
-  <app-svg-home (click)="goToHome()"></app-svg-home>
+<div class="header">
+  <div class="section-navigation">
+    <app-svg-euro class="btn-header" (click)="togglePyramid()"></app-svg-euro>
+    <app-svg-home class="btn-header" (click)="goToHome()"></app-svg-home>
+  </div>
+  <app-jokers class="section-jokers"></app-jokers>
 </div>
-<app-jokers class="section-jokers"></app-jokers>

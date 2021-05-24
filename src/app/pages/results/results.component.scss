@@ -3,7 +3,6 @@
 :host {
   .result-section {
     position: relative;
-    height: 100vh;
     .top {
       position: relative;
       padding-top: 10px;
@@ -22,30 +21,49 @@
     .section-center {
       position: relative;
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       height: 100%;
       .left,
       .right {
-        width: 50%;
-        .left-container,
-        .right-container {
-          position: relative;
-          top: 40%;
-          transform: translateY(-50%);
-        }
+        width: 100%;
       }
       .left {
+        padding-top: 30px;
+        padding-bottom: 30px;
         .logo {
           position: relative;
           left: 50%;
           transform: translateX(-50%);
-          max-height: 300px;
+          max-height: 150px;
         }
       }
-      .right .section-pyramid {
-        position: relative;
-        left: 40%;
-        transform: translateX(-50%);
+    }
+  }
+}
+@media (min-width: $max-with-s) {
+  :host {
+    .result-section {
+      height: 100vh;
+      .section-center {
+        flex-wrap: nowrap;
+        .left,
+        .right {
+          width: 50%;
+          .left-container,
+          .right-container {
+            position: relative;
+            top: 40%;
+            transform: translateY(-50%);
+          }
+        }
+        .left {
+          padding-left: 30px;
+          padding-right: 30px;
+
+          .logo {
+            max-height: 300px;
+          }
+        }
       }
     }
   }

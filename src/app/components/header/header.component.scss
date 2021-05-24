@@ -1,5 +1,49 @@
+@import "styles";
+$margin-b: 5px;
 :host {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .section-navigation {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin-bottom: $margin-b;
+      .btn-header {
+        ::ng-deep {
+          svg {
+            max-width: $svg-ellipse-width;
+          }
+        }
+      }
+    }
+    .section-jokers {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      margin-bottom: $margin-b;
+    }
+  }
+}
+
+@media (min-width: $max-with-s) {
+  :host {
+    .header {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      .section-navigation {
+        width: 50%;
+        justify-content: center;
+        margin-bottom: 0px;
+      }
+      .section-jokers {
+        width: 50%;
+        margin-bottom: 0px;
+      }
+    }
+  }
 }
