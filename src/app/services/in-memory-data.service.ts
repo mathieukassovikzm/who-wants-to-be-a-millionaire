@@ -15,7 +15,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Le Patchouli', visible: true },
           { id: 1, answer: 'Madael', visible: true },
           { id: 2, answer: 'Le Titanic', visible: true },
-          { id: 3, answer: 'Lelali', visible: true }],
+          { id: 3, answer: 'Lelali', visible: true }
+        ],
         correctAnswer: 2
       },
       {
@@ -26,7 +27,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Elween', visible: true },
           { id: 1, answer: 'Damien', visible: true },
           { id: 2, answer: 'Mathieu', visible: true },
-          { id: 3, answer: 'Winni', visible: true }],
+          { id: 3, answer: 'Winni', visible: true }
+        ],
         correctAnswer: 3
       }, {
         id: 2,
@@ -36,7 +38,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Le lançon', visible: true },
           { id: 1, answer: 'Le bar', visible: true },
           { id: 2, answer: 'Le maquereau', visible: true },
-          { id: 3, answer: 'Le poisson panné', visible: true }],
+          { id: 3, answer: 'Le poisson panné', visible: true }
+        ],
         correctAnswer: 0
       }, {
         id: 3,
@@ -56,7 +59,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Michael Guigou', visible: true },
           { id: 1, answer: 'Jérome Fernandez', visible: true },
           { id: 2, answer: 'Frederic Folle', visible: true },
-          { id: 3, answer: 'Nikola Karabatic', visible: true }],
+          { id: 3, answer: 'Nikola Karabatic', visible: true }
+        ],
         correctAnswer: 1
       }, {
         id: 5,
@@ -66,7 +70,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: '1989', visible: true },
           { id: 1, answer: '1992', visible: true },
           { id: 2, answer: '1996', visible: true },
-          { id: 3, answer: '1997', visible: true }],
+          { id: 3, answer: '1997', visible: true }
+        ],
         correctAnswer: 0
       }, {
         id: 6,
@@ -76,7 +81,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Pomerol', visible: true },
           { id: 1, answer: 'Saint Emilions', visible: true },
           { id: 2, answer: 'Château Lafite', visible: true },
-          { id: 3, answer: 'Dom Pérignon', visible: true }],
+          { id: 3, answer: 'Dom Pérignon', visible: true }
+        ],
         correctAnswer: 3
       }, {
         id: 7,
@@ -86,7 +92,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Christophe Alévêque', visible: true },
           { id: 1, answer: 'Franck Dubosc', visible: true },
           { id: 2, answer: 'Benoît Poelvoorde', visible: true },
-          { id: 3, answer: 'Elie Semoun', visible: true }],
+          { id: 3, answer: 'Elie Semoun', visible: true }
+        ],
         correctAnswer: 2
       }, {
         id: 8,
@@ -96,7 +103,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: '6 Février 2020', visible: true },
           { id: 1, answer: '13 Février 2020', visible: true },
           { id: 2, answer: '20 Février 2020', visible: true },
-          { id: 3, answer: '27 Février 2020', visible: true }],
+          { id: 3, answer: '27 Février 2020', visible: true }
+        ],
         correctAnswer: 1
       }, {
         id: 9,
@@ -106,18 +114,20 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: '0', visible: true },
           { id: 1, answer: '1', visible: true },
           { id: 2, answer: '2', visible: true },
-          { id: 3, answer: '3', visible: true }],
+          { id: 3, answer: '3', visible: true }
+        ],
         correctAnswer: 3
       }, {
         id: 10,
         gain: 36000,
-        question: '',
+        question: 'Laquel de ces peinture n\'est pas de Van Gogh',
         answers: [
-          { id: 0, answer: 'answer A', visible: true },
-          { id: 1, answer: 'answer B', visible: true },
-          { id: 2, answer: 'answer C', visible: true },
-          { id: 3, answer: 'answer D', visible: true }],
-        correctAnswer: 2
+          { id: 0, answer: 'Bal du moulin de la Galette', visible: true },
+          { id: 1, answer: 'Terrasse du café le soir', visible: true },
+          { id: 2, answer: 'Irises', visible: true },
+          { id: 3, answer: 'La nuit étoilée', visible: true }
+        ],
+        correctAnswer: 0
       }, {
         id: 11,
         gain: 72000,
@@ -126,7 +136,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Camping torre del sol', visible: true },
           { id: 1, answer: 'Camping de kerabus', visible: true },
           { id: 2, answer: 'Camping la ferme de villeneuve', visible: true },
-          { id: 3, answer: 'Camping APV Au Val de Loire en Ré', visible: true }],
+          { id: 3, answer: 'Camping APV Au Val de Loire en Ré', visible: true }
+        ],
         correctAnswer: 0
       }, {
         id: 12,
@@ -136,7 +147,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Indochine', visible: true },
           { id: 1, answer: 'Mickey 3D', visible: true },
           { id: 2, answer: 'Shaka Ponk', visible: true },
-          { id: 3, answer: 'Manu chao', visible: true }],
+          { id: 3, answer: 'Manu chao', visible: true }
+        ],
         correctAnswer: 1
       }, {
         id: 13,
@@ -146,7 +158,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: '26', visible: true },
           { id: 1, answer: '28', visible: true },
           { id: 2, answer: '30', visible: true },
-          { id: 3, answer: '32', visible: true }],
+          { id: 3, answer: '32', visible: true }
+        ],
         correctAnswer: 2
       }, {
         id: 14,
@@ -156,7 +169,8 @@ export class InMemoryDataService implements InMemoryDbService {
           { id: 0, answer: 'Enceintes stéréo', visible: true },
           { id: 1, answer: 'Un livre de vin', visible: true },
           { id: 2, answer: 'Bureau de travail', visible: true },
-          { id: 3, answer: 'Meuble de rangement', visible: true }],
+          { id: 3, answer: 'Meuble de rangement', visible: true }
+        ],
         correctAnswer: 1
       }
     ];
