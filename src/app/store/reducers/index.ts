@@ -52,6 +52,7 @@ export class CustomSerializer implements fromRouter.RouterStateSerializer<Router
       state = state.firstChild;
     }
     const params = state.params;
+
     return { url, queryParams, params };
   }
 }

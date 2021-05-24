@@ -29,8 +29,7 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(fromRouterActions.ActRouterNavigation({
       payload: {
         path: [`/home`],
-        query: {},
-        extras: {},
+        queryParams: {},
       }
     }
     ));

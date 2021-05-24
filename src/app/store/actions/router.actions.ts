@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { NavigationExtras } from '@angular/router';
+import { Params } from '@angular/router';
 
 /* Enum les types d'actions possibles*/
 export enum RouterActionTypes {
@@ -8,5 +8,5 @@ export enum RouterActionTypes {
 
 export const ActRouterNavigation = createAction(
   RouterActionTypes.NAVIGATE,
-  props<{ payload: { path: any[]; query?: object; extras?: NavigationExtras } }>()
+  props<{ payload: { path: any[]; queryParams: Params; } }>()
 );

@@ -26,12 +26,16 @@
       transform: translateX(-50%) translateY(-50%);
       max-height: 500px;
     }
-    .button {
+    .buttons {
       position: absolute;
       bottom: 5%;
-      width: 30%;
-      left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      .button {
+        min-width: 300px;
+      }
     }
   }
 }

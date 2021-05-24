@@ -80,8 +80,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.store.dispatch(fromRouterActions.ActRouterNavigation({
         payload: {
           path: [`/question/${this.currentQuestion.id + 1}`],
-          query: {},
-          extras: {},
+          queryParams: {},
         }
       }));
     }
@@ -92,8 +91,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.store.dispatch(fromRouterActions.ActRouterNavigation({
         payload: {
           path: [`/results`],
-          query: {},
-          extras: {},
+          queryParams: {},
         }
       }));
     }
