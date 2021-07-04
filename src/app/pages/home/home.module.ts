@@ -5,11 +5,13 @@ import {
   ButtonModule
 } from '@app/components/index';
 import { HomeRouterModule } from './home-routing.module';
+import { AudioModule } from '@app/components/audio/audio.component';
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
     ButtonModule,
+    // AudioModule,
     HomeRouterModule
   ],
   exports: [HomeComponent]
