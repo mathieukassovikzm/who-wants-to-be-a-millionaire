@@ -9,6 +9,8 @@ import * as fromStore from '@app/store/index';
 import * as fromRouterActions from '@app/store/actions/router.actions';
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
+import { AudioService } from '@app/services/audio.service';
+import { TypeSound } from '@app/models/enum-type-sound';
 
 @Component({
   selector: 'app-main',
@@ -30,7 +32,9 @@ export class MainComponent implements OnInit, OnDestroy {
   showAnswer = false;
   subscription: Subscription = new Subscription();
 
-  constructor(public store: Store<fromStore.AppState>, private router: Router) {
+  constructor(
+    public store: Store<fromStore.AppState>, 
+    public audioService: AudioService) {
   }
 
   ngOnInit(): void {
@@ -75,6 +79,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     if (this.showAnswer === true) {
+      this.audioService.picCurrentSound(TypeSound.QuestionSuspense);
       this.store.dispatch(new fromStore.ActResetAnswerChosen());
       this.store.dispatch(new fromStore.ActHideAnswer());
       this.store.dispatch(fromRouterActions.ActRouterNavigation({
@@ -101,8 +106,10 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.currentAnswer !== -1) {
       this.store.dispatch(new fromStore.ActDisplayAnswer());
       if (this.currentAnswer === this.currentQuestion.correctAnswer) {
+        this.audioService.picCurrentSound(TypeSound.QuestionWin);
         this.store.dispatch(new fromStore.ActSetQuestionAnswerRight(this.currentQuestion.id));
       } else {
+        this.audioService.picCurrentSound(TypeSound.QuestionLose);
         this.store.dispatch(new fromStore.ActSetQuestionAnswerWrong(this.currentQuestion.id));
       }
     }

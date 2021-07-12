@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Howl, Howler } from 'howler';
+import { AudioService } from '@app/services/audio.service';
 
 @Component({
   selector: 'app-audio',
@@ -9,19 +9,15 @@ import { Howl, Howler } from 'howler';
   styleUrls: ['./audio.component.scss']
 })
 export class AudioComponent implements OnInit {
-  sound = new Howl({
-    src: ['./../../../assets/musics/Theme.mp3'],
-    html5: true
-  });
-
-  constructor() {
- }
-
+  constructor(public audioService: AudioService) {
+  }
   ngOnInit() {
-    // Play the sound.
-    this.sound.play();
-    // Change global volume.
-    Howler.volume(1);
+  }
+  play():void{
+    this.audioService.play();
+  }
+  pause():void{
+    this.audioService.pause();
   }
 }
 @NgModule({

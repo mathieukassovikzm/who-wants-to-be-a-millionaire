@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromRouterActions from '@app/store/actions/router.actions';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Howl, Howler } from 'howler';
+import { AudioService } from '@app/services/audio.service';
+import { TypeSound } from '@app/models/enum-type-sound';
 
 @Component({
   selector: 'app-home',
@@ -16,25 +16,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   title$: Observable<string> = new Observable<string>();
   birthday$: Observable<string> = new Observable<string>();
 
-  sound = new Howl({
-    src: ['./../../../assets/musics/Theme.mp3'],
-    html5: true,
-    onend: function() {
-      console.log('Finished!');
-    }
-  });
-
-  constructor(public store: Store<fromStore.AppState>, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    public store: Store<fromStore.AppState>, 
+    public audioService: AudioService) {
   }
 
   ngOnInit(): void {
     this.title$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppTitle);
     this.birthday$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppCurrentYear);
-
-    // Play the sound.
-    this.sound.play();
-    // Change global volume.
-    Howler.volume(1);
+    this.audioService.picCurrentSound(TypeSound.Theme);
   }
 
   startGame(): void {

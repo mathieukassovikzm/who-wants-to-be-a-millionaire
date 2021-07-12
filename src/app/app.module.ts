@@ -15,6 +15,8 @@ import { Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects, CustomSerializer } from '@app/store/index';
+import { AudioService } from './services/audio.service';
+import { AudioModule } from './components/audio/audio.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +38,13 @@ import { reducers, effects, CustomSerializer } from '@app/store/index';
     EffectsModule.forRoot(),
     EffectsModule.forFeature(effects),
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    AudioModule
   ],
   providers: [
     Store,
-    { provide: RouterStateSerializer, useClass: CustomSerializer }
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
+    AudioService
   ],
   bootstrap: [AppComponent]
 })

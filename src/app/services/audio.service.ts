@@ -1,68 +1,135 @@
 import { Injectable } from "@angular/core";
-import { Observable, BehaviorSubject, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { TypeSound } from "@app/models/enum-type-sound";
+import { Howl, Howler } from 'howler';
+
 
 @Injectable({
   providedIn: "root"
 })
 export class AudioService {
-  private stop$ = new Subject();
-  private audioObj = new Audio();
-  audioEvents = [
-    "ended",
-    "error",
-    "play",
-    "playing",
-    "pause",
-    "timeupdate",
-    "canplay",
-    "loadedmetadata",
-    "loadstart"
-  ];
+  private currentSound : TypeSound | undefined;
 
-  private streamObservable(url) {
-    new Observable(observer => {
-      // Play audio
-      this.audioObj.src = url;
-      this.audioObj.load();
-      this.audioObj.play();
-
-      const handler = (event: Event) => {
-        observer.next(event);
-      };
-
-      this.addEvents(this.audioObj, this.audioEvents, handler);
-      return () => {
-        // Stop Playing
-        this.audioObj.pause();
-        this.audioObj.currentTime = 0;
-        // remove event listeners
-        this.removeEvents(this.audioObj, this.audioEvents, handler);
-      };
-    });
+  private sounds = {
+    Theme : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/Theme.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('Theme Start!');
+        }
+      })
+    },
+    ExplainKnockoutGame : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/ExplainKnockoutGame.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('ExplainKnockoutGame Start!');
+        }
+      })
+    },
+    FastestFingerFirstOrderReveal : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/FastestFingerFirstOrderReveal.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('FastestFingerFirstOrderReveal Start!');
+        }
+      })
+    },
+    First5Questions : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/First5Questions.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('First5Questions Start!');
+        }
+      })
+    },
+    QuestionLose : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionLose.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionLose Start!');
+        }
+      })
+    },
+    QuestionLose2 : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionLose2.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionLose2 Start!');
+        }
+      })
+    },
+    QuestionPicked : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionPicked.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionPicked Start!');
+        }
+      })
+    },
+    QuestionSuspense : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionSuspense.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionSuspense Start!');
+        }
+      })
+    },
+    QuestionSuspense2 : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionSuspense2.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionSuspense2 Start!');
+        }
+      })
+    },
+    QuestionWin : {
+      sound: new Howl({
+        src: ['./../../../assets/musics/QuestionWin.mp3'],
+        html5: true,
+        onplay: function() {
+          console.log('QuestionWin Start!');
+        }
+      })
+    },
   }
 
-  private addEvents(obj, events, handler) {
-    events.forEach(event => {
-      obj.addEventListener(event, handler);
-    });
+  public picCurrentSound(song: TypeSound): void {
+    if(song !== undefined){
+      this.currentSound = song;
+    } 
   }
 
-  private removeEvents(obj, events, handler) {
-    events.forEach(event => {
-      obj.removeEventListener(event, handler);
-    });
+  public play(): void {
+    if(this.currentSound !== undefined){
+      console.log('Play the music')
+      this.sounds[TypeSound[this.currentSound]].sound.play();
+    } 
   }
 
-  play() {
-    this.audioObj.play();
+  public pause(): void {
+    if(this.currentSound !== undefined){
+      console.log('Pause the music')
+      this.sounds[TypeSound[this.currentSound]].sound.pause();
+    } 
   }
 
-  pause() {
-    this.audioObj.pause();
+  public unload(): void {
+    if(this.currentSound !== undefined){
+      console.log('unload the music')
+      this.sounds[TypeSound[this.currentSound]].sound.unload();
+    } 
   }
 
-  stop() {
-    this.stop$.next();
+
+  public stop(): void {
   }
 }
