@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as questionsActions from '@app/store/actions/questions.actions';
+import * as fromSelectors from '@app/store/selectors';
+import { AppState } from '@app/store/reducers';
 import { QuestionService, AudioService } from '@app/services';
 import { TypeSound } from '@app/models/enum-type-sound';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 
 export class QuestionsEffects {
   constructor(
     private actions$: Actions,
+    private store: Store<AppState>,
     private questionService: QuestionService,
     private audioService: AudioService) {
   }
@@ -29,6 +33,25 @@ export class QuestionsEffects {
     }
   );
 
+  ActNextQuestion$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<questionsActions.ActNextQuestion>(questionsActions.QuestionsActionTypes.NEXT_QUESTION),
+        switchMap(async (action) => {
+          if (action.payload < 5) {
+            this.audioService.picCurrentSound(TypeSound.First5Questions);
+            this.audioService.play();
+          } else if (action.payload < 5) {
+            this.audioService.picCurrentSound(TypeSound.QuestionSuspense);
+            this.audioService.play();
+          } else {
+            this.audioService.picCurrentSound(TypeSound.QuestionSuspense2);
+            this.audioService.play();
+          }
+        })
+      ),
+    { dispatch: false }
+  );
 
   ActSetAnswerChosen$ = createEffect(
     () =>

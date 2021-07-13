@@ -1,168 +1,422 @@
 {
-  "questions" : [
+  "questions": [
     {
       "id": 0,
       "gain": 100,
       "question": "Lors de ton Evg, quel était le nom de la stripteaseuse ?",
       "answers": [
-        { "id": 0, "answer": "Oxana", "visible": true },
-        { "id": 1, "answer": "Jessica", "visible": true },
-        { "id": 2, "answer": "Mathilda", "visible": true },
-        { "id": 3, "answer": "Pamela", "visible": true }
+        {
+          "id": 0,
+          "answer": "Oxana",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Jessica",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Mathilda",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Pamela",
+          "visible": true
+        }
       ],
-      "correctAnswer": 3
+      "correctAnswer": 2
     },
     {
       "id": 1,
       "gain": 200,
       "question": "Qui as-tu vue nu en premier ?",
       "answers": [
-        { "id": 0, "answer": "Aurore", "visible": true },
-        { "id": 1, "answer": "Micka", "visible": true },
-        { "id": 2, "answer": "Ta mère", "visible": true },
-        { "id": 3, "answer": "Ta cousine", "visible": true }
+        {
+          "id": 0,
+          "answer": "Aurore",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Micka",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Ta mère",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Ta cousine",
+          "visible": true
+        }
       ],
       "correctAnswer": 3
-    }, {
+    },
+    {
       "id": 2,
       "gain": 300,
       "question": "Quel est l'acteur préfère de ta femme?",
       "answers": [
-        { "id": 0, "answer": "Toi, quand tu simules au lit", "visible": true },
-        { "id": 1, "answer": "Toi, quand tu simules au foot", "visible": true },
-        { "id": 2, "answer": "Toi, quand tu simules au boulot", "visible": true },
-        { "id": 3, "answer": "Ryan Gosling", "visible": true }
+        {
+          "id": 0,
+          "answer": "Toi, quand tu simules au lit",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Toi, quand tu simules au foot",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Toi, quand tu simules au boulot",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Ryan Gosling",
+          "visible": true
+        }
       ],
       "correctAnswer": 3
-    }, {
+    },
+    {
       "id": 3,
       "gain": 500,
       "question": "Avec qui Flo préfère t'il prendre dans le cul?",
       "answers": [
-        { "id": 0, "answer": "Makélélé", "visible": true },
-        { "id": 1, "answer": "Les impots", "visible": true },
-        { "id": 2, "answer": "La poste", "visible": true },
-        { "id": 3, "answer": "Boulbi", "visible": true }],
+        {
+          "id": 0,
+          "answer": "Makélélé",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Les impots",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "La poste",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Boulbi",
+          "visible": true
+        }
+      ],
       "correctAnswer": 2
-    }, {
+    },
+    {
       "id": 4,
       "gain": 1000,
       "question": "Quel était le poids et la taille de Emma à la naissance ?",
       "answers": [
-        { "id": 0, "answer": "46 cm / 2,640kg", "visible": true },
-        { "id": 1, "answer": "46 cm / 2,740kg", "visible": true },
-        { "id": 2, "answer": "48 cm / 2,640kg", "visible": true },
-        { "id": 3, "answer": "48 cm / 2,740kg", "visible": true }
+        {
+          "id": 0,
+          "answer": "46 cm / 2,640kg",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "46 cm / 2,740kg",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "48 cm / 2,640kg",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "48 cm / 2,740kg",
+          "visible": true
+        }
       ],
       "correctAnswer": 0
-    }, {
+    },
+    {
       "id": 5,
       "gain": 2000,
       "question": "Quel est le nom/prénom de ton professeur de FPGA a l’INSA ?",
       "answers": [
-        { "id": 0, "answer": "Jean-Christophe Prevotet", "visible": true },
-        { "id": 1, "answer": "Jean-Charles Prevotet", "visible": true },
-        { "id": 2, "answer": "Jean-Michel Prevotet", "visible": true },
-        { "id": 3, "answer": "Jean-Pierre Prevotet", "visible": true }
+        {
+          "id": 0,
+          "answer": "Jean-Christophe Prevotet",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Jean-Charles Prevotet",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Jean-Michel Prevotet",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Jean-Pierre Prevotet",
+          "visible": true
+        }
       ],
       "correctAnswer": 0
-    }, {
+    },
+    {
       "id": 6,
       "gain": 8000,
       "question": "Quel cépage est le plus cultivé en nouvelle Zélande ?",
       "answers": [
-        { "id": 0, "answer": "Pinot noir", "visible": true },
-        { "id": 1, "answer": "Chardonnay", "visible": true },
-        { "id": 2, "answer": "Sauvignon blanc", "visible": true },
-        { "id": 3, "answer": "Merlot", "visible": true }
+        {
+          "id": 0,
+          "answer": "Merlot",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Chardonnay",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Sauvignon blanc",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Pinot noir",
+          "visible": true
+        }
       ],
-      "correctAnswer": 0
-    }, {
+      "correctAnswer": 3
+    },
+    {
       "id": 7,
       "gain": 12000,
       "question": "Quel Personnalité connue n\"est pas née en 1990 ?",
       "answers": [
-        { "id": 0, "answer": "Emma Watson", "visible": true },
-        { "id": 1, "answer": "Alizé Cornet", "visible": true },
-        { "id": 2, "answer": "Taylor Swift", "visible": true },
-        { "id": 3, "answer": "Margot Robbie", "visible": true }
+        {
+          "id": 0,
+          "answer": "Emma Watson",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Alizé Cornet",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Taylor Swift",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Margot Robbie",
+          "visible": true
+        }
       ],
       "correctAnswer": 2
-    }, {
+    },
+    {
       "id": 8,
       "gain": 12000,
       "question": "Quel était le premier groupe que tu as vue au Hellfest 2017?",
       "answers": [
-        { "id": 0, "answer": "Avatar", "visible": true },
-        { "id": 1, "answer": "Steel Panther", "visible": true },
-        { "id": 2, "answer": "Dead Daisies", "visible": true },
-        { "id": 3, "answer": "Phil Campbell & The Bastards Sons", "visible": true }
+        {
+          "id": 0,
+          "answer": "Steel Panther",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Avatar",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Dead Daisies",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Phil Campbell & The Bastards Sons",
+          "visible": true
+        }
       ],
-      "correctAnswer": 0
-    }, {
+      "correctAnswer": 1
+    },
+    {
       "id": 9,
       "gain": 24000,
       "question": "Lesquelles de ces lettres ne correspondent pas à une immatriculation de bateau dans un port français ?",
       "answers": [
-        { "id": 0, "answer": "SM", "visible": true },
-        { "id": 1, "answer": "BR", "visible": true },
-        { "id": 2, "answer": "LO", "visible": true },
-        { "id": 3, "answer": "PS", "visible": true }
+        {
+          "id": 0,
+          "answer": "SM",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "BR",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "LO",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "PS",
+          "visible": true
+        }
       ],
       "correctAnswer": 3
-    }, {
+    },
+    {
       "id": 10,
       "gain": 36000,
       "question": "Quel est la superfice approximative du Leroy Merlin Betton?",
       "answers": [
-        { "id": 0, "answer": "12000m²", "visible": true },
-        { "id": 1, "answer": "13000m²", "visible": true },
-        { "id": 2, "answer": "14000m²", "visible": true },
-        { "id": 3, "answer": "15000m²", "visible": true }
+        {
+          "id": 0,
+          "answer": "10000m²",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "11000m²",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "12000m²",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "13000m²",
+          "visible": true
+        }
       ],
-      "correctAnswer": 0
-    }, {
+      "correctAnswer": 2
+    },
+    {
       "id": 11,
       "gain": 72000,
       "question": "Quel plante n'as tu pas dans ton jardin?",
       "answers": [
-        { "id": 0, "answer": "Solanum lycopersicum", "visible": true },
-        { "id": 1, "answer": "Fragaria", "visible": true },
-        { "id": 2, "answer": "Cucurbita pepo", "visible": true },
-        { "id": 3, "answer": "Physalis peruviana", "visible": true }
+        {
+          "id": 0,
+          "answer": "Solanum lycopersicum",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Fragaria",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Cucurbita pepo",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Physalis peruviana",
+          "visible": true
+        }
       ],
-      "correctAnswer": 0
-    }, {
+      "correctAnswer": 3
+    },
+    {
       "id": 12,
       "gain": 150000,
       "question": "Combien de but Zinedine Zidane a-t-il marqué en équipe nationale ?",
       "answers": [
-        { "id": 0, "answer": "31", "visible": true },
-        { "id": 1, "answer": "33", "visible": true },
-        { "id": 2, "answer": "35", "visible": true },
-        { "id": 3, "answer": "37", "visible": true }
+        {
+          "id": 0,
+          "answer": "31",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "33",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "35",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "37",
+          "visible": true
+        }
       ],
-      "correctAnswer": 1
-    }, {
+      "correctAnswer": 0
+    },
+    {
       "id": 13,
       "gain": 300000,
       "question": "Combien y'a t'il d'habitant à Puisieux-et-clanlieu?",
       "answers": [
-        { "id": 0, "answer": "263", "visible": true },
-        { "id": 1, "answer": "278", "visible": true },
-        { "id": 2, "answer": "284", "visible": true },
-        { "id": 3, "answer": "296", "visible": true }
+        {
+          "id": 0,
+          "answer": "263",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "278",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "284",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "296",
+          "visible": true
+        }
       ],
       "correctAnswer": 3
-    }, {
+    },
+    {
       "id": 14,
       "gain": 1000000,
       "question": "Qui va être bouré ce soir?",
       "answers": [
-        { "id": 0, "answer": "Fleau", "visible": true },
-        { "id": 1, "answer": "Flo", "visible": true },
-        { "id": 2, "answer": "Flot", "visible": true },
-        { "id": 3, "answer": "Flowwwww", "visible": true }
+        {
+          "id": 0,
+          "answer": "Fleau",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "answer": "Flo",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "answer": "Flot",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "answer": "Flowwwww",
+          "visible": true
+        }
       ],
       "correctAnswer": 1
     }

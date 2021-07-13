@@ -77,6 +77,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     if (this.showAnswer === true) {
+      this.store.dispatch(new fromStore.ActNextQuestion(this.currentQuestion.id + 1));
       this.store.dispatch(new fromStore.ActResetAnswerChosen());
       this.store.dispatch(new fromStore.ActHideAnswer());
       this.store.dispatch(fromRouterActions.ActRouterNavigation({

@@ -7,6 +7,7 @@ export enum QuestionsActionTypes {
   LOAD_QUESTIONS = '[Questions] Load Questions',
   LOAD_QUESTIONS_FAIL = '[Questions] Load Questions Fail',
   LOAD_QUESTIONS_SUCCESS = '[Questions] Load Questions Success',
+  NEXT_QUESTION = '[Questions] Next Question',
   SET_ANSWER_CHOSEN = '[Questions] Set Answer Chosen',
   SET_QUESTION_ANSWER_RIGHT = '[Questions] Set Question Answer Right',
   SET_QUESTION_ANSWER_WRONG = '[Questions] Set Question Answer Wrong',
@@ -30,6 +31,11 @@ export class ActLoadQuestionsFail implements Action {
 export class ActLoadQuestionsSuccess implements Action {
   readonly type = QuestionsActionTypes.LOAD_QUESTIONS_SUCCESS;
   constructor(public payload: QuestionModel[]) { }
+}
+
+export class ActNextQuestion implements Action {
+  readonly type = QuestionsActionTypes.NEXT_QUESTION;
+  constructor(public payload: number) { }
 }
 
 export class ActSetAnswerChosen implements Action {
@@ -77,6 +83,7 @@ export type QuestionsActions =
   | ActLoadQuestions
   | ActLoadQuestionsFail
   | ActLoadQuestionsSuccess
+  | ActNextQuestion
   | ActSetAnswerChosen
   | ActSetQuestionAnswerRight
   | ActSetQuestionAnswerWrong

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   birthday$: Observable<string> = new Observable<string>();
 
   constructor(
-    public store: Store<fromStore.AppState>, 
+    public store: Store<fromStore.AppState>,
     public audioService: AudioService) {
   }
 
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   startGame(): void {
+    this.store.dispatch(new fromStore.ActNextQuestion(0));
     this.store.dispatch(fromRouterActions.ActRouterNavigation({
       payload: {
         path: [`/question/0`],

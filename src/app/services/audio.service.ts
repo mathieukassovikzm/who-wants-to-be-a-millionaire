@@ -113,21 +113,18 @@ export class AudioService {
   public play(): void {
     if (this.currentSound !== undefined) {
       this.unload();
-      console.log('Play the music');
       this.sounds[TypeSound[this.currentSound]].sound.play();
     }
   }
 
   public pause(): void {
     if (this.currentSound !== undefined) {
-      console.log('Pause the music');
       this.sounds[TypeSound[this.currentSound]].sound.pause();
     }
   }
 
   public unload(): void {
     if (this.previousSound !== undefined) {
-      console.log('unload the music');
       this.sounds[TypeSound[this.previousSound]].sound.unload();
     }
   }
