@@ -29,7 +29,7 @@ export const getCurrentQuestion = createSelector(
   getQuestionsEntities,
   getRouterState,
   (entities: QuestionEntity, router: fromRouter.RouterReducerState<RouterStateUrl>): QuestionModel => {
-    let index = router.state.params.questionId as number;
+    const index = router.state.params.questionId as number;
     return router.state && entities.lstQuestions && entities.lstQuestions[index];
   }
 );
@@ -37,7 +37,7 @@ export const getCurrentQuestion = createSelector(
 export const getQuestionId = createSelector(
   getRouterState,
   (router: fromRouter.RouterReducerState<RouterStateUrl>) => {
-    return router.state.params.questionId
+    return router.state.params.questionId;
   }
 );
 
@@ -57,7 +57,7 @@ export const getAllGoodAnsweredQuestions = createSelector(
   getAllQuestions,
   (lstQt) => {
     if (lstQt) {
-      return lstQt && lstQt.filter(qt => qt.goodAnswer === true)
+      return lstQt && lstQt.filter(qt => qt.goodAnswer === true);
     } else {
       return {} as QuestionModel[];
     }

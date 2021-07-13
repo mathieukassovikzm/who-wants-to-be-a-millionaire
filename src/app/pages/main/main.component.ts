@@ -32,9 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
   showAnswer = false;
   subscription: Subscription = new Subscription();
 
-  constructor(
-    public store: Store<fromStore.AppState>, 
-    public audioService: AudioService) {
+  constructor(public store: Store<fromStore.AppState>) {
   }
 
   ngOnInit(): void {
@@ -44,7 +42,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
     const sub1 = this.currentQuestion$.subscribe(
       question => {
-        this.currentQuestion = question
+        this.currentQuestion = question;
       }
     );
 
@@ -79,7 +77,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     if (this.showAnswer === true) {
-      this.audioService.picCurrentSound(TypeSound.QuestionSuspense);
       this.store.dispatch(new fromStore.ActResetAnswerChosen());
       this.store.dispatch(new fromStore.ActHideAnswer());
       this.store.dispatch(fromRouterActions.ActRouterNavigation({
@@ -106,10 +103,8 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.currentAnswer !== -1) {
       this.store.dispatch(new fromStore.ActDisplayAnswer());
       if (this.currentAnswer === this.currentQuestion.correctAnswer) {
-        this.audioService.picCurrentSound(TypeSound.QuestionWin);
         this.store.dispatch(new fromStore.ActSetQuestionAnswerRight(this.currentQuestion.id));
       } else {
-        this.audioService.picCurrentSound(TypeSound.QuestionLose);
         this.store.dispatch(new fromStore.ActSetQuestionAnswerWrong(this.currentQuestion.id));
       }
     }
