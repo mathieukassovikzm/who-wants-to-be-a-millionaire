@@ -420,5 +420,14 @@
       ],
       "correctAnswer": 1
     }
-  ]
+  ],
+  "title": "Annif Flo",
+  "birthday": "31 ans",
+  "txtFin":{
+    "resultEx": "Score parfait... Rien a dire... Tu viens de gagner un coup de ceinturon a offrir a la personne de ton choix (Boulbi/Damien/Micka)!",
+    "resultTb": "Score pas loin d'être parfait, On boit tous un shot a ta santé!",
+    "resultBn": "Résultat tout a fait honorable mais pas de quoi se la pèter non plus... Tout le monde boit!",
+    "resultPm": "C'est pas top tout ca... Ca mérite un bon petit shooter dans ta gueule!",
+    "resultNu": "Score null a chier! Tu viens de gagner le droit de te faire fouetter au ceinturon par la personne de ton choix (Boulbi/Damien/Micka)!!!"
+  }
 }

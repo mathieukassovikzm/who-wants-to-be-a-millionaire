@@ -11,6 +11,7 @@ import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import { AudioService } from '@app/services/audio.service';
 import { TypeSound } from '@app/models/enum-type-sound';
+import { QuestionService } from '@app/services';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +20,7 @@ import { TypeSound } from '@app/models/enum-type-sound';
 })
 export class MainComponent implements OnInit, OnDestroy {
   title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<number> = new Observable<number>();
+  birthday$: Observable<string> = new Observable<string>();
   menuOpened$: Observable<boolean> = new Observable<boolean>();
   menuOpened = false;
 
@@ -32,12 +33,15 @@ export class MainComponent implements OnInit, OnDestroy {
   showAnswer = false;
   subscription: Subscription = new Subscription();
 
-  constructor(public store: Store<fromStore.AppState>) {
+  constructor(
+    public store: Store<fromStore.AppState>,
+    public questionService : QuestionService
+    ) {
   }
 
   ngOnInit(): void {
-    this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
+    this.title$ = this.questionService.getTitleFromServeur();
+    this.birthday$ = this.questionService.getAgeFromServeur();
 
     this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
     const sub1 = this.currentQuestion$.subscribe(

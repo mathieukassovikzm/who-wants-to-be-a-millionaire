@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { QuestionModel } from '@app/models/question-model';
+import { TxtFin } from '@app/models/txt-fin';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,9 @@ import { QuestionModel } from '@app/models/question-model';
 export class QuestionService {
 
   private questionsUrl = 'api/questions';  // URL to web api
+  private titleUrl = 'api/title';  // URL to web api
+  private ageUrl = 'api/age';  // URL to web api
+  private TxtFinUrl = 'api/txtfin';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,6 +33,29 @@ export class QuestionService {
       );
   }
 
+  getTitleFromServeur(): Observable<string> {
+    return this.http.get<string>(this.titleUrl)
+      .pipe(
+        tap(_ => this.log('fetched Title')),
+        catchError(this.handleError<string>('getTitleFromServeur', ""))
+      );
+  }
+
+  getAgeFromServeur(): Observable<string> {
+    return this.http.get<string>(this.ageUrl)
+      .pipe(
+        tap(_ => this.log('fetched Age')),
+        catchError(this.handleError<string>('getAgeFromServeur', ""))
+      );
+  }
+
+  getTxtFinFromServeur(): Observable<TxtFin> {
+    return this.http.get<TxtFin>(this.TxtFinUrl)
+      .pipe(
+        tap(_ => this.log('fetched TxtFin')),
+        catchError(this.handleError<TxtFin>('getTxtFinFromServeur', <TxtFin>{}))
+      );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.

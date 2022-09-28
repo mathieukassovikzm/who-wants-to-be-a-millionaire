@@ -166,5 +166,14 @@
       ],
       "correctanswer": 1
     }
-  ]
+  ],
+  "title": "Annif Papa",
+  "birthday": "58 ans",
+  "txtFin":{
+    "resultEx": "Score parfait... Rien a dire... Gros respect pour le vieux!",
+    "resultTb": "Score pas loin d'être parfait, bravo tu peux être fier de toi! Trop fort le vieux!",
+    "resultBn": "Pas mal pour un vieux, tu as obtenu un résultat tout a fait honorable mais pas de quoi se la pèter non plus...",
+    "resultPm": "C'est pas top tout ca... Certe tu as tout de même glané quelques bonnes réponses mais on s'attendait à mieux... Peut mieux faire le vieux!",
+    "resultNu": "Booouuuuuu t'es mauvais le vieux! va faloir taffer pour améliorer tout ça!!"
+  }
 }

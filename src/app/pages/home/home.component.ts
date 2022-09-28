@@ -6,6 +6,7 @@ import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors
 import * as fromRouterActions from '@app/store/actions/router.actions';
 import { AudioService } from '@app/services/audio.service';
 import { TypeSound } from '@app/models/enum-type-sound';
+import { QuestionService } from '@app/services';
 
 @Component({
   selector: 'app-home',
@@ -18,12 +19,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     public store: Store<fromStore.AppState>,
-    public audioService: AudioService) {
+    public audioService: AudioService,
+    public questionService : QuestionService
+    ) {
   }
 
   ngOnInit(): void {
-    this.title$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppCurrentYear);
+    this.title$ = this.questionService.getTitleFromServeur();
+    this.birthday$ = this.questionService.getAgeFromServeur();
     this.audioService.picCurrentSound(TypeSound.Theme);
   }
 

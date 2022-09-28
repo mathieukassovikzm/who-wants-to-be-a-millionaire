@@ -7,6 +7,7 @@ import * as fromStore from '@app/store/index';
 import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
 import * as fromQuestions from '@app/store/selectors/question.selectors';
 import * as fromQuestionsActions from '@app/store/actions/questions.actions';
+import { QuestionService } from '@app/services';
 
 @Component({
   selector: 'app-footer',
@@ -15,11 +16,15 @@ import * as fromQuestionsActions from '@app/store/actions/questions.actions';
 })
 export class FooterComponent implements OnInit {
   title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<number> = new Observable<number>();
+  birthday$: Observable<string> = new Observable<string>();
 
-  constructor(public store: Store<fromStore.AppState>) {
-    this.title$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppCurrentYear);
+  constructor(
+    public store: Store<fromStore.AppState>,
+    public questionService : QuestionService
+    ) {
+      this.title$ = this.questionService.getTitleFromServeur();
+      this.birthday$ = this.questionService.getAgeFromServeur();
+      
   }
 
   ngOnInit(): void { }

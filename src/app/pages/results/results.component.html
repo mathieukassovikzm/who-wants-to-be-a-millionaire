@@ -7,12 +7,12 @@
     <div class="left">
       <div class="left-container">
         <img class="logo" src="./../../../assets/Logo-Qui-veut-gagner-des-millions.png" alt="QVGDM">
-        <div class="infos-results">
-          <p *ngIf="isResultEx()">Score parfait... Rien a dire... Tu viens de gagner un gros poutoux de la part du présentateur !</p>
-          <p *ngIf="isResultTB()">Score pas loin d'être parfait, On boit tous un shot a ta santé!</p>
-          <p *ngIf="isResultBN()">Résultat tout a fait honorable mais pas de quoi se la pèter non plus... Tout le monde boit!</p>
-          <p *ngIf="isResultPM()">C'est pas top tout ca... Ca mérite un bon petit shooter dans ta gueule !</p>
-          <p *ngIf="isResultNU()">Score null a chier ! Jean papa tu viens de gagner le droit de retourner lundi à l'école avec ta fille !</p>
+        <div class="infos-results" *ngIf="txtFin$ | async as txtfin">
+          <p *ngIf="isResultEx()">{{txtfin.resultEx}}</p>
+          <p *ngIf="isResultTB()">{{txtfin.resultTb}}</p>
+          <p *ngIf="isResultBN()">{{txtfin.resultBn}}</p>
+          <p *ngIf="isResultPM()">{{txtfin.resultPm}}</p>
+          <p *ngIf="isResultNU()">{{txtfin.resultNu}}</p>
           <p>Tu as répondu correctement à {{ nbGoodAnswers }} des 15 question</p>
           <p>Nous avons le plaisir de t'annoncer que tu as gagné {{ nbGains }}€ ainsi que le droit de recommencer!</p>
           <!-- <p>Allez tu as assez patienté... Place au cadeau !!!! </p> -->

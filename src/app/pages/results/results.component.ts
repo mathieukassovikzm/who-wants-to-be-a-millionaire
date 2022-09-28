@@ -5,6 +5,8 @@ import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors
 import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
 import { Observable, Subscription } from 'rxjs';
 import { QuestionModel } from '@app/models/question-model';
+import { QuestionService } from '@app/services';
+import { TxtFin } from '@app/models/txt-fin';
 
 @Component({
   selector: 'app-results',
@@ -14,6 +16,7 @@ import { QuestionModel } from '@app/models/question-model';
 export class ResultsComponent implements OnInit, OnDestroy {
   title$: Observable<string> = new Observable<string>();
   birthday$: Observable<string> = new Observable<string>();
+  txtFin$: Observable<TxtFin> = new Observable<TxtFin>();
 
   lstGoodAnswers$: Observable<QuestionModel[]>;
   lstGoodAnswers: QuestionModel[];
@@ -25,12 +28,16 @@ export class ResultsComponent implements OnInit, OnDestroy {
   limitTB: number = 12;
   limitBN: number = 9;
   limitPM: number = 6;
-  constructor(public store: Store<fromStore.AppState>) { }
+  constructor(
+    public store: Store<fromStore.AppState>,
+    public questionService : QuestionService
+    ) { 
+      this.title$ = this.questionService.getTitleFromServeur();
+      this.birthday$ = this.questionService.getAgeFromServeur();
+      this.txtFin$ = this.questionService.getTxtFinFromServeur();
+    }
 
   ngOnInit() {
-    this.title$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppTitle);
-    this.birthday$ = this.store.select<string>(fromInfosAppSelectors.getInfosAppCurrentYear);
-
     this.lstGoodAnswers$ = this.store.select<any>(fromQuestionsSelectors.getAllGoodAnsweredQuestions);
     const sub1 = this.lstGoodAnswers$.subscribe(
       lst => {

@@ -2,15 +2,11 @@ import { Action } from '@ngrx/store';
 import { InfosAppActionTypes, InfosAppActions } from '../actions/infos-app.actions';
 
 export interface InfosAppState {
-  title: string;
-  currentYear: string;
   menuOpened: boolean;
 }
 
 // Initial state of the store
 const initialState: InfosAppState = {
-  title: 'Annif Thibu',
-  currentYear: '33 ans',
   menuOpened: false
 };
 
@@ -35,6 +31,4 @@ export function infosAppReducer(
   }
 }
 
-export const getInfosAppTitle = (state: InfosAppState) => state.title;
-export const getInfosAppCurrentYear = (state: InfosAppState) => state.currentYear;
 export const getInfosAppMenuOpened = (state: InfosAppState) => state.menuOpened;

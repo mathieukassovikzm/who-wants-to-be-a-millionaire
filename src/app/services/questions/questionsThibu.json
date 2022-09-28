@@ -420,5 +420,14 @@
       ],
       "correctAnswer": 1
     }
-  ]
+  ],
+  "title": "Annif Thibu",
+  "birthday": "33 ans",
+  "txtFin":{
+    "resultEx": "Score parfait... Rien a dire... Tu viens de gagner un gros poutoux de la part du présentateur !",
+    "resultTb": "Score pas loin d'être parfait, On boit tous un shot a ta santé!",
+    "resultBn": "Résultat tout a fait honorable mais pas de quoi se la pèter non plus... Tout le monde boit!",
+    "resultPm": "C'est pas top tout ca... Ca mérite un bon petit shooter dans ta gueule !",
+    "resultNu": "Score null a chier ! Jean papa tu viens de gagner le droit de retourner lundi à l'école avec ta fille !"
+  }
 }
