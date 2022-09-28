@@ -9,8 +9,8 @@ export interface InfosAppState {
 
 // Initial state of the store
 const initialState: InfosAppState = {
-  title: 'Annif Flo',
-  currentYear: '31 ans',
+  title: 'Annif Thibu',
+  currentYear: '33 ans',
   menuOpened: false
 };
 
