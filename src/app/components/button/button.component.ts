@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
-import {
-  SvgGainModule
-} from '@app/components/svgs';
+import { Component, OnInit } from '@angular/core';
+import { SvgGainComponent } from '../svgs/svg-gain/svg-gain.component';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
+  imports: [
+    CommonModule,
+    SvgGainComponent
+  ],
+  standalone: true
 })
 export class ButtonComponent implements OnInit {
 
@@ -16,15 +19,4 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    SvgGainModule
-  ],
-  exports: [ButtonComponent],
-  declarations: [ButtonComponent]
-})
-export class ButtonModule { }
