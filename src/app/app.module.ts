@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
 
@@ -19,33 +19,27 @@ import { AudioService } from './services/audio.service';
 import { AudioModule } from './components/audio/audio.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ReversePipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('appState', reducers),
-    EffectsModule.forRoot(),
-    EffectsModule.forFeature(effects),
-    StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument(),
-    AudioModule
-  ],
-  providers: [
-    Store,
-    { provide: RouterStateSerializer, useClass: CustomSerializer },
-    AudioService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ReversePipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+        // and returns simulated server responses.
+        // Remove it when a real server is ready to receive requests.
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('appState', reducers),
+        EffectsModule.forRoot(),
+        EffectsModule.forFeature(effects),
+        StoreRouterConnectingModule.forRoot(),
+        StoreDevtoolsModule.instrument(),
+        AudioModule], providers: [
+            Store,
+            { provide: RouterStateSerializer, useClass: CustomSerializer },
+            AudioService,
+            provideHttpClient(withInterceptorsFromDi())
+        ]
 })
 export class AppModule { }
