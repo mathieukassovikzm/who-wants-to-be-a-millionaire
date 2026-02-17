@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { InfosAppStore } from '@app/store/infos-app.store';
 
@@ -6,7 +6,7 @@ import { InfosAppStore } from '@app/store/infos-app.store';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  imports: [CommonModule],
+  imports: [],
   standalone: true
 })
 export class FooterComponent implements OnInit {

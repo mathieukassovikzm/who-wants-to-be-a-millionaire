@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { QuestionEntity } from '@app/models/question-entity';
 import { InfosAppStore } from '@app/store/infos-app.store';
@@ -18,9 +18,8 @@ const svgs = [
   templateUrl: './jokers.component.html',
   styleUrls: ['./jokers.component.scss'],
   imports: [
-    CommonModule,
     ...svgs
-  ],
+],
   standalone: true
 })
 export class JokersComponent implements OnInit {

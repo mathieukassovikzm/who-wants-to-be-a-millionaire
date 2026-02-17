@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { QuestionModel } from '@app/models/question-model';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@app/components/button/button.component';
 import { FooterComponent } from '@app/components/footer/footer.component';
@@ -17,14 +17,13 @@ import { QuestionsStore } from '@app/store/question.store';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   imports: [
-    CommonModule,
     ButtonComponent,
     HeaderComponent,
     FooterComponent,
     PyramidComponent,
     QuestionComponent,
-    SvgCircleGainComponent,
-  ],
+    SvgCircleGainComponent
+],
   standalone: true
 })
 export class MainComponent {

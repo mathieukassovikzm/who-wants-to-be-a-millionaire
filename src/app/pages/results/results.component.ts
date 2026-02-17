@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { PyramidComponent } from '@app/components/pyramid/pyramid.component';
 import { QuestionModel } from '@app/models/question-model';
@@ -11,9 +11,8 @@ import { Observable } from 'rxjs';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
   imports: [
-    CommonModule,
-    PyramidComponent,
-  ],
+    PyramidComponent
+],
   standalone: true
 })
 export class ResultsComponent implements OnInit {

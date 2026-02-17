@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { QuestionModel } from '@app/models/question-model';
 import { Observable, Subscription } from 'rxjs';
@@ -16,9 +16,8 @@ const svgs = [
   templateUrl: './pyramid.component.html',
   styleUrls: ['./pyramid.component.scss'],
   imports: [
-    CommonModule,
     ...svgs
-  ],
+],
   standalone: true
 })
 export class PyramidComponent {

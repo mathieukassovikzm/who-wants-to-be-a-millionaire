@@ -93,7 +93,7 @@ export const QuestionsStore = signalStore(
     ActLoadQuestions(): void {
       const questions = datasService.getQuestionsFromServeur();
       const entityQt = toEntityQuestion(questions, store.entities());
-
+console.log('entityQt', entityQt);
       patchState(store, {
         entities: entityQt,
         loading: false,

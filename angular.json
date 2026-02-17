@@ -59,6 +59,13 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false
             }
           }
         },
@@ -72,7 +79,7 @@
               "buildTarget": "who-wants-to-be-a-millionaire:build:production"
             },
             "development": {
-              "buildTarget": "who-wants-to-be-a-millionaire:build:production"
+              "buildTarget": "who-wants-to-be-a-millionaire:build:development"
             }
           },
           "defaultConfiguration": "development"

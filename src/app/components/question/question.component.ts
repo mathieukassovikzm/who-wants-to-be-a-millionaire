@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { QuestionsStore } from '@app/store/question.store';
 import { SvgGainComponent } from '../svgs/svg-gain/svg-gain.component';
@@ -14,9 +14,8 @@ const svgs = [
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
   imports: [
-    CommonModule,
     ...svgs
-  ],
+],
   standalone: true
 })
 export class QuestionComponent implements OnInit {

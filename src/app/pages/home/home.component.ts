@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@app/components/button/button.component';
@@ -12,7 +12,7 @@ import { QuestionsStore } from '@app/store/question.store';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, ButtonComponent],
+  imports: [ButtonComponent],
   standalone: true
 })
 export class HomeComponent implements OnInit, OnDestroy {

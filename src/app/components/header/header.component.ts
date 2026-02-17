@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { JokersComponent } from '../jokers/jokers.component';
 import { SvgEuroComponent } from '../svgs/svg-euro/svg-euro.component';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [CommonModule, SvgEuroComponent, SvgHomeComponent, JokersComponent],
+  imports: [SvgEuroComponent, SvgHomeComponent, JokersComponent],
   standalone: true
 })
 export class HeaderComponent implements OnInit {

@@ -10,13 +10,10 @@ import { QuestionsStore } from './store/question.store';
   imports: [RouterModule, AudioComponent],
   standalone: true
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   readonly questionsStore = inject(QuestionsStore);
 
   constructor() {
-  }
-
-  ngOnInit(): void {
     this.questionsStore.ActLoadQuestions();
   }
 }
