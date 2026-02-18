@@ -1,6 +1,5 @@
 
 import { Component, inject, OnInit } from '@angular/core';
-import { QuestionEntity } from '@app/models/question-entity';
 import { InfosAppStore } from '@app/store/infos-app.store';
 import { QuestionsStore } from '@app/store/question.store';
 import { SvgJokerCallComponent } from '../svgs/svg-joker-call/svg-joker-call.component';
@@ -26,11 +25,9 @@ export class JokersComponent implements OnInit {
   readonly questionsStore = inject(QuestionsStore);
   readonly infosAppStore = inject(InfosAppStore);
 
-  public usedJokerFifty = this.questionsStore.jokerFiftyUsed();
-  public usedJokerCall = this.questionsStore.jokerCallUsed();
-  public usedJokerPublic = this.questionsStore.jokerPublicUsed();
-  public questionId: number = 0;
-  public questionsEntity: QuestionEntity;
+  public sUsedJokerFifty = this.questionsStore.jokerFiftyUsed;
+  public sUsedJokerCall = this.questionsStore.jokerCallUsed;
+  public sUsedJokerPublic = this.questionsStore.jokerPublicUsed;
 
   constructor() {
   }
@@ -39,28 +36,28 @@ export class JokersComponent implements OnInit {
   }
 
   useJokerFifty(): void {
-    if (this.usedJokerFifty === false) {
-      this.questionsStore.ActJokerFiftyToFalse(this.questionId);
+    if (this.sUsedJokerFifty() === false) {
+      this.questionsStore.ActJokerFiftyToFalse();
     }
   }
   useJokerCall(): void {
-    if (this.usedJokerCall === false) {
+    if (this.sUsedJokerCall() === false) {
       this.questionsStore.ActJokerCallToFalse();
     }
   }
   useJokerPublic(): void {
-    if (this.usedJokerPublic === false) {
+    if (this.sUsedJokerPublic() === false) {
       this.questionsStore.ActJokerPublicToFalse();
     }
   }
 
   getClassFifty(): string {
-    return this.usedJokerFifty === true ? 'svg-joker svg-joker-used' : 'svg-joker';
+    return this.sUsedJokerFifty() === true ? 'svg-joker svg-joker-used' : 'svg-joker';
   }
   getClassCall(): string {
-    return this.usedJokerCall === true ? 'svg-joker svg-joker-used' : 'svg-joker';
+    return this.sUsedJokerCall() === true ? 'svg-joker svg-joker-used' : 'svg-joker';
   }
   getClassPublic(): string {
-    return this.usedJokerPublic === true ? 'svg-joker svg-joker-used' : 'svg-joker';
+    return this.sUsedJokerPublic() === true ? 'svg-joker svg-joker-used' : 'svg-joker';
   }
 }

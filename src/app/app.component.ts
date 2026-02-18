@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AudioComponent } from './components/audio/audio.component';
 import { QuestionsStore } from './store/question.store';

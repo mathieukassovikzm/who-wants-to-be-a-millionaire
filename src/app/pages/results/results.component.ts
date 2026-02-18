@@ -12,16 +12,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./results.component.scss'],
   imports: [
     PyramidComponent
-],
+  ],
   standalone: true
 })
 export class ResultsComponent implements OnInit {
   readonly infosAppStore = inject(InfosAppStore);
   readonly questionsStore = inject(QuestionsStore);
 
-  public title = this.infosAppStore.getTitle();
-  public birthday = this.infosAppStore.getAge();
-  public txtFin = this.infosAppStore.getTxtFin();
+  public title = this.infosAppStore.getTitle;
+  public birthday = this.infosAppStore.getAge;
+  public txtFin = this.infosAppStore.getTxtFin;
 
   nbGoodAnswers: number = 0;
   nbGains: number = 0;
@@ -30,7 +30,7 @@ export class ResultsComponent implements OnInit {
   limitBN: number = 9;
   limitPM: number = 6;
 
-  constructor(  ) {
+  constructor() {
     effect(() => {
       const lstGoodAnswers = this.questionsStore.getAllGoodAnsweredQuestions();
       if (lstGoodAnswers && lstGoodAnswers.length > 0) {

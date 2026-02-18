@@ -3,8 +3,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@app/components/button/button.component';
 import { TypeSound } from '@app/models/enum-type-sound';
-import { AudioService } from '@app/services/audio.service';
 import { DatasService } from '@app/services/datas.service';
+import { AudioStore } from '@app/store/audio.store';
 import { InfosAppStore } from '@app/store/infos-app.store';
 import { QuestionsStore } from '@app/store/question.store';
 
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   readonly router = inject(Router);
   readonly infosAppStore = inject(InfosAppStore);
   readonly questionsStore = inject(QuestionsStore);
-  readonly audioService = inject(AudioService);
+  readonly audioStore = inject(AudioStore);
 
   public title = this.infosAppStore.getTitle();
   public birthday = this.infosAppStore.getAge();
@@ -30,11 +30,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.audioService.picCurrentSound(TypeSound.Theme);
+    this.audioStore.picCurrentSound(TypeSound.Theme);
   }
 
   startGame(): void {
-    this.questionsStore.ActNextQuestion();
     this.router.navigate([`/question/0`], {
       queryParams: {},
     });

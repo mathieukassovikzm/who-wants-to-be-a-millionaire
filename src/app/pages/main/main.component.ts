@@ -23,7 +23,7 @@ import { QuestionsStore } from '@app/store/question.store';
     PyramidComponent,
     QuestionComponent,
     SvgCircleGainComponent
-],
+  ],
   standalone: true
 })
 export class MainComponent {
@@ -33,32 +33,31 @@ export class MainComponent {
 
   public title = this.infosAppStore.getTitle();
   public birthday = this.infosAppStore.getAge();
-  public menuOpened = this.infosAppStore.menuOpened();
+  public menuOpened = this.infosAppStore.menuOpened;
 
   public questions: Observable<QuestionModel[]>;
-  public currentQuestion = this.questionsStore.getCurrentQuestion();
-  public currentAnswer = this.questionsStore.answerChosen;
-  public showAnswer = this.questionsStore.displayAnswer;
+  public sCurrentQuestion = this.questionsStore.getCurrentQuestion;
+  public sCurrentAnswer = this.questionsStore.answerChosen;
+  public sShowAnswer = this.questionsStore.displayAnswer;
 
   constructor() { }
 
   getMainClass(): string {
-    return this.menuOpened ? 'main-section opened' : 'main-section';
+    return this.menuOpened() ? 'main-section opened' : 'main-section';
   }
 
   nextQuestion(): void {
-    if (this.showAnswer() === true) {
-      this.questionsStore.ActNextQuestion();
+    if (this.sShowAnswer() === true) {
       this.questionsStore.ActResetAnswerChosen();
       this.questionsStore.ActHideAnswer();
-      this.router.navigate([`/question/${this.currentQuestion.id + 1}`], {
+      this.router.navigate([`/question/${this.sCurrentQuestion()?.id + 1}`], {
         queryParams: {},
       });
     }
   }
 
   toResult(): void {
-    if (this.showAnswer() === true) {
+    if (this.sShowAnswer() === true) {
       this.router.navigate([`/results`], {
         queryParams: {},
       });
@@ -66,20 +65,20 @@ export class MainComponent {
   }
 
   displayAnswer(): void {
-    if (this.currentAnswer() !== -1) {
+    if (this.sCurrentAnswer() !== -1) {
       this.questionsStore.ActDisplayAnswer();
-      if (this.currentAnswer() === this.currentQuestion.correctAnswer) {
-        this.questionsStore.ActSetQuestionAnswerRight(this.currentQuestion.id);
+      if (this.sCurrentAnswer() === this.sCurrentQuestion()?.correctAnswer) {
+        this.questionsStore.ActSetQuestionAnswer(this.sCurrentQuestion()?.id, true);
       } else {
-        this.questionsStore.ActSetQuestionAnswerWrong(this.currentQuestion.id);
+        this.questionsStore.ActSetQuestionAnswer(this.sCurrentQuestion()?.id, false);
       }
     }
   }
 
   classBtnAnswer(): string {
-    if (this.currentAnswer() === -1) {
+    if (this.sCurrentAnswer() === -1) {
       return 'button button-disabled';
-    } else if (this.currentAnswer() !== -1 && this.showAnswer() === false) {
+    } else if (this.sCurrentAnswer() !== -1 && this.sShowAnswer() === false) {
       return 'button';
     } else {
       return 'button button-disabled';
@@ -87,15 +86,15 @@ export class MainComponent {
   }
 
   classBtnNext(): string {
-    return this.showAnswer() === false ? 'button button-disabled' : 'button';
+    return this.sShowAnswer() === false ? 'button button-disabled' : 'button';
   }
 
   showNext(): boolean {
-    return this.currentQuestion && this.currentQuestion.id < 14 ? true : false;
+    return this.sCurrentQuestion() && this.sCurrentQuestion()?.id < 14 ? true : false;
   }
 
   showResult(): boolean {
-    return this.currentQuestion && this.currentQuestion.id === 14 ? true : false;
+    return this.sCurrentQuestion() && this.sCurrentQuestion()?.id === 14 ? true : false;
   }
 }
 

@@ -1,50 +1,45 @@
 
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { QuestionModel } from '@app/models/question-model';
-import { Observable, Subscription } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { QuestionsStore } from '@app/store/question.store';
 import { SvgGainComponent } from '../svgs/svg-gain/svg-gain.component';
 import { SvgLosangeComponent } from '../svgs/svg-losange/svg-losange.component';
-import { QuestionsStore } from '@app/store/question.store';
-
-const svgs = [
-  SvgGainComponent,
-  SvgLosangeComponent
-];
 
 @Component({
   selector: 'app-pyramid',
   templateUrl: './pyramid.component.html',
   styleUrls: ['./pyramid.component.scss'],
   imports: [
-    ...svgs
-],
+    SvgGainComponent,
+    SvgLosangeComponent
+  ],
   standalone: true
 })
 export class PyramidComponent {
   readonly questionsStore = inject(QuestionsStore);
 
-  sQuestions = this.questionsStore.getAllQuestionsReverse();
-  sCurrentQuestion = this.questionsStore.getCurrentQuestion();
-  sShowAnswer = this.questionsStore.displayAnswer();;
+  sQuestions = this.questionsStore.lstQuestions;
+  sCurrentQuestion = this.questionsStore.getCurrentQuestion;
+  sShowAnswer = this.questionsStore.displayAnswer;
 
   constructor() {
   }
 
   getClass(index: number): string {
-    if (this.sCurrentQuestion) {
-      if (index === this.sCurrentQuestion.id && this.isStage(index)) {
+   const currentQuestion = this.sCurrentQuestion();
+    if (currentQuestion) {
+      if (index === currentQuestion.id && this.isStage(index)) {
         return 'item item-active item-stage';
       }
-      else if (index === this.sCurrentQuestion.id && !this.isStage(index)) {
+      else if (index === currentQuestion.id && !this.isStage(index)) {
         return 'item item-active ';
       }
-      else if (index < this.sCurrentQuestion.id && this.isStage(index)) {
+      else if (index < currentQuestion.id && this.isStage(index)) {
         return 'item item-passed item-stage';
       }
-      else if (index < this.sCurrentQuestion.id && !this.isStage(index)) {
+      else if (index < currentQuestion.id && !this.isStage(index)) {
         return 'item item-passed';
       }
-      else if (index > this.sCurrentQuestion.id && this.isStage(index)) {
+      else if (index > currentQuestion.id && this.isStage(index)) {
         return 'item item-stage';
       }
       else {
@@ -55,8 +50,7 @@ export class PyramidComponent {
     }
   }
   getClassDot(index: number): string {
-    const question$ = this.questionsStore.getQuestion(index);
-    let question = {} as QuestionModel;
+    const question = this.questionsStore.getQuestion(index);
 
     if (question.goodAnswer === true) {
       return 'txt-dot answer-right';

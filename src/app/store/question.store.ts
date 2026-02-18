@@ -1,13 +1,15 @@
 import { computed, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AnswerModel } from '@app/models/answer-model';
-import { QuestionEntity } from '@app/models/question-entity';
+import { TypeSound } from '@app/models/enum-type-sound';
 import { QuestionModel } from '@app/models/question-model';
 import { DatasService } from '@app/services/datas.service';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { AudioStore } from './audio.store';
 
 type QuestionsState = {
-  entities: QuestionEntity;
+  lstQuestions: QuestionModel[];
+  currentQuestionId: number;
   answerChosen: number;
   displayAnswer: boolean;
   jokerFiftyUsed: boolean;
@@ -18,7 +20,8 @@ type QuestionsState = {
 };
 
 const initialState: QuestionsState = {
-  entities: {} as QuestionEntity,
+  lstQuestions: [] as QuestionModel[],
+  currentQuestionId: -1,
   answerChosen: -1,
   displayAnswer: false,
   jokerFiftyUsed: false,
@@ -28,26 +31,6 @@ const initialState: QuestionsState = {
   loading: false
 };
 
-export function toEntityQuestion(
-  questions: QuestionModel[],
-  questionsEntity: QuestionEntity
-): QuestionEntity {
-  const lstQuestions = questions.reduce(
-    (entities: { [id: number]: QuestionModel }, question: QuestionModel) => {
-      return {
-        ...entities,
-        [question.id]: question
-      };
-    }, {
-    ...questionsEntity,
-  }
-  );
-  const entQt = {
-    lstQuestions: lstQuestions
-  }
-  return entQt;
-}
-
 export function getRandomInt(max): number {
   return Math.floor(Math.random() * max);
 }
@@ -56,24 +39,15 @@ export const QuestionsStore = signalStore(
   { providedIn: 'root' },
   withState<QuestionsState>(initialState),
   withComputed((store, route = inject(ActivatedRoute)) => ({
-    getAllQuestions: computed(() => {
-      const lstQuestions = store.entities().lstQuestions;
-      return lstQuestions && Object.keys(lstQuestions).map(id => lstQuestions[parseInt(id, 10)]);
-    }),
-    getAllQuestionsReverse: computed(() => {
-      const lstQuestions = store.entities().lstQuestions;
-      return lstQuestions && Object.keys(lstQuestions).map(id => lstQuestions[parseInt(id, 10)]).reverse();
-    }),
     getCurrentQuestion: computed(() => {
-      const index = route.snapshot.params.questionId as number;
-      return store.entities().lstQuestions && store.entities().lstQuestions[index];
-    }),
-    getQuestionId: computed(() => {
+      const index = store.currentQuestionId();
+      const question = store.lstQuestions()?.find(q => q.id == index);
+      return question;
     }),
   })),
   withComputed((store) => ({
     getAllGoodAnsweredQuestions: computed(() => {
-      const lstQt = store.getAllQuestions();
+      const lstQt = store.lstQuestions();
       if (lstQt) {
         return lstQt && lstQt.filter(qt => qt.goodAnswer === true);
       } else {
@@ -81,9 +55,13 @@ export const QuestionsStore = signalStore(
       }
     }),
   })),
-  withMethods((store, datasService = inject(DatasService)) => ({
+  withMethods((
+    store,
+    datasService = inject(DatasService),
+    audioStore = inject(AudioStore),
+  ) => ({
     getQuestion(id: number): QuestionModel {
-      return store.entities().lstQuestions[id];
+      return store.lstQuestions().find(q => q.id == id);
     },
     getGoodAnswerOfQuestion(id: number): AnswerModel {
       const question = this.getQuestion(id);
@@ -92,56 +70,64 @@ export const QuestionsStore = signalStore(
 
     ActLoadQuestions(): void {
       const questions = datasService.getQuestionsFromServeur();
-      const entityQt = toEntityQuestion(questions, store.entities());
-console.log('entityQt', entityQt);
+
+      // On affiche toutes les réponses
+      let patchedLst = questions.map((qt) => {
+        const answerPatched = qt.answers.map((answer) => {
+          return { ...answer, visible: true };
+        });
+        return { ...qt, answers: answerPatched };
+      });
+
+      // On range les questions dans l'ordre décroissant d'id
+      patchedLst = patchedLst.sort((a, b) => b.id - a.id);
+
       patchState(store, {
-        entities: entityQt,
+        lstQuestions: patchedLst,
         loading: false,
         loaded: true
       });
     },
-    ActNextQuestion(): void {
+    ActSetCurrentQuestionId(questionId: number): void {
+      if (0 <= questionId && questionId < 5) {
+        audioStore.picCurrentSound(TypeSound.First5Questions);
+      } else if (5 <= questionId && questionId < 10) {
+        audioStore.picCurrentSound(TypeSound.QuestionSuspense);
+      } else if (10 <= questionId && questionId < 15) {
+        audioStore.picCurrentSound(TypeSound.QuestionSuspense2);
+      }
 
+      patchState(store, {
+        currentQuestionId: questionId
+      });
     },
     ActSetAnswerChosen(answerId: number): void {
+      audioStore.picCurrentSound(TypeSound.QuestionPicked);
+
       patchState(store, {
         answerChosen: answerId
       });
     },
-    ActSetQuestionAnswerRight(payload: number): void {
-      let newEntityQtRight = {} as QuestionEntity;
-      newEntityQtRight.lstQuestions = Object.keys(store.entities.lstQuestions).map(
-        id => {
-          if (store.entities.lstQuestions[parseInt(id, 10)].id == payload) {
-            return {
-              ...store.entities.lstQuestions[payload],
-              goodAnswer: true
-            };
-          } else {
-            return store.entities.lstQuestions[parseInt(id, 10)];
-          }
+    ActSetQuestionAnswer(payload: number, isGood: boolean): void {
+      if (isGood) {
+        audioStore.picCurrentSound(TypeSound.QuestionWin);
+      } else {
+        audioStore.picCurrentSound(TypeSound.QuestionLose);
+      }
+      // on cherche la question à modifier dans la liste des questions
+      const patchedLst = store.lstQuestions().map(qt => {
+        if (qt.id === payload) {
+          return {
+            ...qt,
+            goodAnswer: isGood
+          };
+        } else {
+          return qt;
         }
-      );
-      patchState(store, {
-        entities: newEntityQtRight,
       });
-    },
-    ActSetQuestionAnswerWrong(payload: number): void {
-      let newEntityQtWrong = {} as QuestionEntity;
-      newEntityQtWrong.lstQuestions = Object.keys(store.entities.lstQuestions).map(
-        id => {
-          if (store.entities.lstQuestions[parseInt(id, 10)].id == payload) {
-            return {
-              ...store.entities.lstQuestions[payload],
-              goodAnswer: false
-            };
-          } else {
-            return store.entities.lstQuestions[parseInt(id, 10)];
-          }
-        }
-      );
+
       patchState(store, {
-        entities: newEntityQtWrong,
+        lstQuestions: patchedLst
       });
     },
     ActResetAnswerChosen(): void {
@@ -159,33 +145,34 @@ console.log('entityQt', entityQt);
         displayAnswer: false
       });
     },
-    ActJokerFiftyToFalse(payload: number): void {
-      const questionId = payload;
-      const questionsEntity = store.entities;
+    ActJokerFiftyToFalse(): void {
+      const questionId = store.currentQuestionId();
 
-      let currentQuestionMdf = questionsEntity.lstQuestions[questionId];
+      let currentQuestionMdf = this.getQuestion(questionId);
       // Get first index to hide
       let randomIndex1 = -1;
       do {
         randomIndex1 = getRandomInt(4);
-      } while (randomIndex1 === currentQuestionMdf.correctAnswer);
+      } while (randomIndex1 == currentQuestionMdf.correctAnswer);
+
       // Get first index to hide
       let answersCopy = currentQuestionMdf.answers.map(
         (answer: AnswerModel) => {
-          if (answer.id === randomIndex1) {
+          if (answer.id == randomIndex1) {
             answer = { ...answer, visible: false };
           }
           return answer;
         }
       );
+
       // Get second index to hide
       let randomIndex2 = -1;
       do {
         randomIndex2 = getRandomInt(4);
-      } while (randomIndex2 === currentQuestionMdf.correctAnswer || randomIndex2 === randomIndex1);
+      } while (randomIndex2 == currentQuestionMdf.correctAnswer || randomIndex2 == randomIndex1);
       answersCopy = answersCopy.map(
         (answer: AnswerModel) => {
-          if (answer.id === randomIndex2) {
+          if (answer.id == randomIndex2) {
             answer = { ...answer, visible: false };
           }
           return answer;
@@ -198,21 +185,16 @@ console.log('entityQt', entityQt);
         answers: answersCopy
       };
 
-      let newLstQt = Object.keys(store.entities.lstQuestions).map(
-        id => {
-          if (store.entities.lstQuestions[parseInt(id, 10)].id == questionId) {
-            return currentQuestionMdf;
-          } else {
-            return store.entities.lstQuestions[parseInt(id, 10)];
-          }
+      const patchedLst = store.lstQuestions().map(qt => {
+        if (qt.id == questionId) {
+          return currentQuestionMdf;
+        } else {
+          return qt;
         }
-      );
-
-      let newEntity = {} as QuestionEntity;
-      newEntity.lstQuestions = newLstQt;
+      });
 
       patchState(store, {
-        entities: newEntity,
+        lstQuestions: patchedLst,
         jokerFiftyUsed: true
       });
     },

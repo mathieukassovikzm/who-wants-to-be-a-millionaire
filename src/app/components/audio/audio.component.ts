@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AudioService } from '@app/services/audio.service';
+import { Component, inject } from '@angular/core';
+import { AudioStore } from '@app/store/audio.store';
 
 @Component({
   selector: 'app-audio',
@@ -7,15 +7,16 @@ import { AudioService } from '@app/services/audio.service';
   styleUrls: ['./audio.component.scss'],
   standalone: true
 })
-export class AudioComponent implements OnInit {
-  constructor(public audioService: AudioService) {
-  }
-  ngOnInit() {
+export class AudioComponent {
+
+  readonly audioStore = inject(AudioStore);
+
+  constructor() {
   }
   play(): void {
-    this.audioService.play();
+    this.audioStore.setSound(false);
   }
   pause(): void {
-    this.audioService.pause();
+    this.audioStore.setSound(true);
   }
 }
