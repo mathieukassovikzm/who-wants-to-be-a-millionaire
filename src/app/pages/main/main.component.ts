@@ -1,124 +1,84 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { QuestionModel } from '@app/models/question-model';
-import { Observable, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { } from '@ngrx/router-store';
+import { Observable } from 'rxjs';
 
-import * as fromStore from '@app/store/index';
-import * as fromRouterActions from '@app/store/actions/router.actions';
-import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
-import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
-import { AudioService } from '@app/services/audio.service';
-import { TypeSound } from '@app/models/enum-type-sound';
-import { QuestionService } from '@app/services';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '@app/components/button/button.component';
+import { FooterComponent } from '@app/components/footer/footer.component';
+import { HeaderComponent } from '@app/components/header/header.component';
+import { PyramidComponent } from '@app/components/pyramid/pyramid.component';
+import { QuestionComponent } from '@app/components/question/question.component';
+import { SvgCircleGainComponent } from '@app/components/svgs/svg-circle-gain/svg-circle-gain.component';
+import { InfosAppStore } from '@app/store/infos-app.store';
+import { QuestionsStore } from '@app/store/question.store';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  imports: [
+    ButtonComponent,
+    HeaderComponent,
+    FooterComponent,
+    PyramidComponent,
+    QuestionComponent,
+    SvgCircleGainComponent
+  ],
+  standalone: true
 })
-export class MainComponent implements OnInit, OnDestroy {
-  title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<string> = new Observable<string>();
-  menuOpened$: Observable<boolean> = new Observable<boolean>();
-  menuOpened = false;
+export class MainComponent {
+  readonly router = inject(Router);
+  readonly infosAppStore = inject(InfosAppStore);
+  readonly questionsStore = inject(QuestionsStore);
 
-  questions$: Observable<QuestionModel[]>;
-  currentQuestion$: Observable<QuestionModel>;
-  currentQuestion: QuestionModel;
-  currentAnswer$: Observable<number>;
-  currentAnswer = -1;
-  showAnswer$: Observable<boolean>;
-  showAnswer = false;
-  subscription: Subscription = new Subscription();
+  public title = this.infosAppStore.getTitle();
+  public birthday = this.infosAppStore.getAge();
+  public menuOpened = this.infosAppStore.menuOpened;
 
-  constructor(
-    public store: Store<fromStore.AppState>,
-    public questionService : QuestionService
-    ) {
-  }
+  public questions: Observable<QuestionModel[]>;
+  public sCurrentQuestion = this.questionsStore.getCurrentQuestion;
+  public sCurrentAnswer = this.questionsStore.answerChosen;
+  public sShowAnswer = this.questionsStore.displayAnswer;
 
-  ngOnInit(): void {
-    this.title$ = this.questionService.getTitleFromServeur();
-    this.birthday$ = this.questionService.getAgeFromServeur();
-
-    this.currentQuestion$ = this.store.select<any>(fromQuestionsSelectors.getCurrentQuestion);
-    const sub1 = this.currentQuestion$.subscribe(
-      question => {
-        this.currentQuestion = question;
-      }
-    );
-
-    this.menuOpened$ = this.store.select<any>(fromInfosAppSelectors.getInfosAppMenuOpened);
-    const sub2 = this.menuOpened$.subscribe(
-      res => this.menuOpened = res
-    );
-
-    this.showAnswer$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsDisplayAnswer);
-    const sub3 = this.showAnswer$.subscribe(
-      res => this.showAnswer = res
-    );
-
-    this.currentAnswer$ = this.store.select<number>(fromQuestionsSelectors.getQuestionsAnswerChosen);
-    const sub4 = this.currentAnswer$.subscribe(
-      res => this.currentAnswer = res
-    );
-
-    this.subscription.add(sub1);
-    this.subscription.add(sub2);
-    this.subscription.add(sub3);
-    this.subscription.add(sub4);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  constructor() { }
 
   getMainClass(): string {
-    return this.menuOpened ? 'main-section opened' : 'main-section';
+    return this.menuOpened() ? 'main-section opened' : 'main-section';
   }
 
   nextQuestion(): void {
-    if (this.showAnswer === true) {
-      this.store.dispatch(new fromStore.ActNextQuestion(this.currentQuestion.id + 1));
-      this.store.dispatch(new fromStore.ActResetAnswerChosen());
-      this.store.dispatch(new fromStore.ActHideAnswer());
-      this.store.dispatch(fromRouterActions.ActRouterNavigation({
-        payload: {
-          path: [`/question/${this.currentQuestion.id + 1}`],
-          queryParams: {},
-        }
-      }));
+    if (this.sShowAnswer() === true) {
+      this.questionsStore.ActResetAnswerChosen();
+      this.questionsStore.ActHideAnswer();
+      this.router.navigate([`/question/${this.sCurrentQuestion()?.id + 1}`], {
+        queryParams: {},
+      });
     }
   }
 
   toResult(): void {
-    if (this.showAnswer === true) {
-      this.store.dispatch(fromRouterActions.ActRouterNavigation({
-        payload: {
-          path: [`/results`],
-          queryParams: {},
-        }
-      }));
+    if (this.sShowAnswer() === true) {
+      this.router.navigate([`/results`], {
+        queryParams: {},
+      });
     }
   }
 
   displayAnswer(): void {
-    if (this.currentAnswer !== -1) {
-      this.store.dispatch(new fromStore.ActDisplayAnswer());
-      if (this.currentAnswer === this.currentQuestion.correctAnswer) {
-        this.store.dispatch(new fromStore.ActSetQuestionAnswerRight(this.currentQuestion.id));
+    if (this.sCurrentAnswer() !== -1) {
+      this.questionsStore.ActDisplayAnswer();
+      if (this.sCurrentAnswer() === this.sCurrentQuestion()?.correctAnswer) {
+        this.questionsStore.ActSetQuestionAnswer(this.sCurrentQuestion()?.id, true);
       } else {
-        this.store.dispatch(new fromStore.ActSetQuestionAnswerWrong(this.currentQuestion.id));
+        this.questionsStore.ActSetQuestionAnswer(this.sCurrentQuestion()?.id, false);
       }
     }
   }
 
   classBtnAnswer(): string {
-    if (this.currentAnswer === -1) {
+    if (this.sCurrentAnswer() === -1) {
       return 'button button-disabled';
-    } else if (this.currentAnswer !== -1 && this.showAnswer === false) {
+    } else if (this.sCurrentAnswer() !== -1 && this.sShowAnswer() === false) {
       return 'button';
     } else {
       return 'button button-disabled';
@@ -126,15 +86,15 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   classBtnNext(): string {
-    return this.showAnswer === false ? 'button button-disabled' : 'button';
+    return this.sShowAnswer() === false ? 'button button-disabled' : 'button';
   }
 
   showNext(): boolean {
-    return this.currentQuestion && this.currentQuestion.id < 14 ? true : false;
+    return this.sCurrentQuestion() && this.sCurrentQuestion()?.id < 14 ? true : false;
   }
 
   showResult(): boolean {
-    return this.currentQuestion && this.currentQuestion.id === 14 ? true : false;
+    return this.sCurrentQuestion() && this.sCurrentQuestion()?.id === 14 ? true : false;
   }
 }
 

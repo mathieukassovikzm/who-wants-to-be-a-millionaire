@@ -1,61 +1,49 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromStore from '@app/store/index';
-import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
-import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
-import { Observable, Subscription } from 'rxjs';
+
+import { Component, effect, inject, OnInit } from '@angular/core';
+import { PyramidComponent } from '@app/components/pyramid/pyramid.component';
 import { QuestionModel } from '@app/models/question-model';
-import { QuestionService } from '@app/services';
-import { TxtFin } from '@app/models/txt-fin';
+import { InfosAppStore } from '@app/store/infos-app.store';
+import { QuestionsStore } from '@app/store/question.store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  styleUrls: ['./results.component.scss'],
+  imports: [
+    PyramidComponent
+  ],
+  standalone: true
 })
-export class ResultsComponent implements OnInit, OnDestroy {
-  title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<string> = new Observable<string>();
-  txtFin$: Observable<TxtFin> = new Observable<TxtFin>();
+export class ResultsComponent implements OnInit {
+  readonly infosAppStore = inject(InfosAppStore);
+  readonly questionsStore = inject(QuestionsStore);
 
-  lstGoodAnswers$: Observable<QuestionModel[]>;
-  lstGoodAnswers: QuestionModel[];
+  public title = this.infosAppStore.getTitle;
+  public birthday = this.infosAppStore.getAge;
+  public txtFin = this.infosAppStore.getTxtFin;
+
   nbGoodAnswers: number = 0;
   nbGains: number = 0;
-  subscription: Subscription = new Subscription();
-
   limitEX: number = 15;
   limitTB: number = 12;
   limitBN: number = 9;
   limitPM: number = 6;
-  constructor(
-    public store: Store<fromStore.AppState>,
-    public questionService : QuestionService
-    ) { 
-      this.title$ = this.questionService.getTitleFromServeur();
-      this.birthday$ = this.questionService.getAgeFromServeur();
-      this.txtFin$ = this.questionService.getTxtFinFromServeur();
-    }
 
-  ngOnInit() {
-    this.lstGoodAnswers$ = this.store.select<any>(fromQuestionsSelectors.getAllGoodAnsweredQuestions);
-    const sub1 = this.lstGoodAnswers$.subscribe(
-      lst => {
-        this.lstGoodAnswers = lst;
-
-        if (this.lstGoodAnswers && this.lstGoodAnswers.length > 0) {
-          this.nbGoodAnswers = this.lstGoodAnswers.length;
-          this.lstGoodAnswers.forEach(goodAnswer => {
-            this.nbGains = this.nbGains + goodAnswer.gain
-          });
-        }
+  constructor() {
+    effect(() => {
+      const lstGoodAnswers = this.questionsStore.getAllGoodAnsweredQuestions();
+      if (lstGoodAnswers && lstGoodAnswers.length > 0) {
+        this.nbGoodAnswers = lstGoodAnswers.length;
+        this.nbGains = 0;
+        lstGoodAnswers.forEach(goodAnswer => {
+          this.nbGains = this.nbGains + goodAnswer.gain
+        });
       }
-    );
-    this.subscription.add(sub1);
+    });
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngOnInit() {
   }
 
   isResultEx(): boolean {

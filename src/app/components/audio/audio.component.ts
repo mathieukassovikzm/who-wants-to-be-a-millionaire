@@ -1,30 +1,22 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { AudioService } from '@app/services/audio.service';
+import { Component, inject } from '@angular/core';
+import { AudioStore } from '@app/store/audio.store';
 
 @Component({
   selector: 'app-audio',
   templateUrl: './audio.component.html',
-  styleUrls: ['./audio.component.scss']
+  styleUrls: ['./audio.component.scss'],
+  standalone: true
 })
-export class AudioComponent implements OnInit {
-  constructor(public audioService: AudioService) {
+export class AudioComponent {
+
+  readonly audioStore = inject(AudioStore);
+
+  constructor() {
   }
-  ngOnInit() {
+  play(): void {
+    this.audioStore.setSound(false);
   }
-  play():void{
-    this.audioService.play();
-  }
-  pause():void{
-    this.audioService.pause();
+  pause(): void {
+    this.audioStore.setSound(true);
   }
 }
-@NgModule({
-  declarations: [AudioComponent],
-  imports: [
-    CommonModule,
-  ],
-  exports: [AudioComponent]
-})
-export class AudioModule { }

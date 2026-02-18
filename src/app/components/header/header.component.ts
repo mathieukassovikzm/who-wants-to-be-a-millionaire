@@ -1,52 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import * as fromStore from '@app/store/index';
-import * as fromRouterActions from '@app/store/actions/router.actions';
-import * as fromInfosAppActions from '@app/store/actions/infos-app.actions';
 
-import {
-  JokersModule,
-} from '@app/components/jokers/jokers.component';
-
-import {
-  SvgEuroModule,
-  SvgHomeModule
-} from '@app/components/svgs/index';
+import { Component, inject, OnInit } from '@angular/core';
+import { JokersComponent } from '../jokers/jokers.component';
+import { SvgEuroComponent } from '../svgs/svg-euro/svg-euro.component';
+import { SvgHomeComponent } from '../svgs/svg-home/svg-home.component';
+import { InfosAppStore } from '@app/store/infos-app.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  imports: [SvgEuroComponent, SvgHomeComponent, JokersComponent],
+  standalone: true
 })
 export class HeaderComponent implements OnInit {
+  readonly infosAppStore = inject(InfosAppStore);
+   readonly router = inject(Router);
 
-  constructor(public store: Store<fromStore.AppState>) { }
+  constructor() { }
   ngOnInit(): void { }
 
   goToHome(): void {
-    this.store.dispatch(fromRouterActions.ActRouterNavigation({
-      payload: {
-        path: [`/home`],
-        queryParams: {},
-      }
-    }
-    ));
+    this.router.navigate(['/home']);
   }
 
   togglePyramid(): void {
-    this.store.dispatch(new fromInfosAppActions.ActIfsToggleMenuOpened());
+    this.infosAppStore.ActIfsToggleMenuOpened();
   }
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    JokersModule,
-    SvgEuroModule,
-    SvgHomeModule],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent]
-})
-export class HeaderModule { }

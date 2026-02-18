@@ -3,13 +3,17 @@
   <app-pyramid class="section-pyramid"></app-pyramid>
   <div class="main-section-content">
     <div class="section-logo">
-      <p class="gain">{{(currentQuestion$ | async)?.gain}}€</p>
+      <p class="gain">{{sCurrentQuestion()?.gain}}€</p>
       <app-svg-circle-gain></app-svg-circle-gain>
     </div>
     <div class="section-buttons">
       <app-button [class]="classBtnAnswer()" (click)="displayAnswer()">Réponse</app-button>
-      <app-button *ngIf="showNext()" [class]="classBtnNext()" (click)="nextQuestion()">Next</app-button>
-      <app-button *ngIf="showResult()" [class]="classBtnNext()" (click)="toResult()">Resultats</app-button>
+      @if (showNext()) {
+        <app-button [class]="classBtnNext()" (click)="nextQuestion()">Next</app-button>
+      }
+      @if (showResult()) {
+        <app-button [class]="classBtnNext()" (click)="toResult()">Resultats</app-button>
+      }
     </div>
   </div>
 </section>

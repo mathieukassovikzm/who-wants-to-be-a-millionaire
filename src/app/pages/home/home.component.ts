@@ -1,43 +1,42 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import * as fromStore from '@app/store/index';
-import * as fromInfosAppSelectors from '@app/store/selectors/infos-app.selectors';
-import * as fromRouterActions from '@app/store/actions/router.actions';
-import { AudioService } from '@app/services/audio.service';
+
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '@app/components/button/button.component';
 import { TypeSound } from '@app/models/enum-type-sound';
-import { QuestionService } from '@app/services';
+import { DatasService } from '@app/services/datas.service';
+import { AudioStore } from '@app/store/audio.store';
+import { InfosAppStore } from '@app/store/infos-app.store';
+import { QuestionsStore } from '@app/store/question.store';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  imports: [ButtonComponent],
+  standalone: true
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  title$: Observable<string> = new Observable<string>();
-  birthday$: Observable<string> = new Observable<string>();
+  readonly router = inject(Router);
+  readonly infosAppStore = inject(InfosAppStore);
+  readonly questionsStore = inject(QuestionsStore);
+  readonly audioStore = inject(AudioStore);
+
+  public title = this.infosAppStore.getTitle();
+  public birthday = this.infosAppStore.getAge();
 
   constructor(
-    public store: Store<fromStore.AppState>,
-    public audioService: AudioService,
-    public questionService : QuestionService
-    ) {
+    public questionService: DatasService
+  ) {
   }
 
   ngOnInit(): void {
-    this.title$ = this.questionService.getTitleFromServeur();
-    this.birthday$ = this.questionService.getAgeFromServeur();
-    this.audioService.picCurrentSound(TypeSound.Theme);
+    this.audioStore.picCurrentSound(TypeSound.Theme);
   }
 
   startGame(): void {
-    this.store.dispatch(new fromStore.ActNextQuestion(0));
-    this.store.dispatch(fromRouterActions.ActRouterNavigation({
-      payload: {
-        path: [`/question/0`],
-        queryParams: {},
-      }
-    }));
+    this.router.navigate([`/question/0`], {
+      queryParams: {},
+    });
   }
 
   continueGame(): void {

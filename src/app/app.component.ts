@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromStore from '@app/store/index';
-import * as fromQuestionsActions from '@app/store/actions/questions.actions';
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { AudioComponent } from './components/audio/audio.component';
+import { QuestionsStore } from './store/question.store';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  imports: [RouterModule, AudioComponent],
+  standalone: true
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  readonly questionsStore = inject(QuestionsStore);
 
-  constructor(public store: Store<fromStore.AppState>) {
+  constructor() {
+    this.questionsStore.ActLoadQuestions();
   }
-
-  ngOnInit(): void {
-    this.store.dispatch(new fromQuestionsActions.ActLoadQuestions());
-  }
-
 }

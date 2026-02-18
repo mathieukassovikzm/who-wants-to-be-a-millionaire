@@ -1,67 +1,45 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
-import { QuestionModel } from '@app/models/question-model';
-import { Observable, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import * as fromStore from '@app/store/index';
-import * as fromQuestions from '@app/store/selectors/question.selectors';
-import { ReversePipe } from '@app/helpers';
-import {
-  SvgGainModule,
-  SvgLosangeModule
-} from '@app/components/svgs';
-import * as fromQuestionsSelectors from '@app/store/selectors/question.selectors';
+
+import { Component, inject } from '@angular/core';
+import { QuestionsStore } from '@app/store/question.store';
+import { SvgGainComponent } from '../svgs/svg-gain/svg-gain.component';
+import { SvgLosangeComponent } from '../svgs/svg-losange/svg-losange.component';
 
 @Component({
   selector: 'app-pyramid',
   templateUrl: './pyramid.component.html',
   styleUrls: ['./pyramid.component.scss'],
-  providers: [ReversePipe]
+  imports: [
+    SvgGainComponent,
+    SvgLosangeComponent
+  ],
+  standalone: true
 })
-export class PyramidComponent implements OnInit, OnDestroy {
-  questions$: Observable<QuestionModel[]>;
-  questions: QuestionModel[];
-  currentQuestion$: Observable<QuestionModel>;
-  currentQuestion: QuestionModel;
-  showAnswer$: Observable<boolean>;
-  showAnswer = false;
-  subscription: Subscription = new Subscription();
+export class PyramidComponent {
+  readonly questionsStore = inject(QuestionsStore);
 
-  constructor(public store: Store<fromStore.AppState>) {
-    this.questions$ = this.store.select<QuestionModel[]>(fromQuestions.getAllQuestionsReverse);
-    this.currentQuestion$ = this.store.select<QuestionModel>(fromQuestionsSelectors.getCurrentQuestion);
-    this.showAnswer$ = this.store.select<boolean>(fromQuestionsSelectors.getQuestionsDisplayAnswer);
-  }
+  sQuestions = this.questionsStore.lstQuestions;
+  sCurrentQuestion = this.questionsStore.getCurrentQuestion;
+  sShowAnswer = this.questionsStore.displayAnswer;
 
-  ngOnInit(): void {
-    const sub1 = this.questions$.subscribe(res => this.questions = res);
-    const sub2 = this.currentQuestion$.subscribe(question => this.currentQuestion = question);
-    const sub3 = this.showAnswer$.subscribe(res => this.showAnswer = res);
-
-    this.subscription.add(sub1);
-    this.subscription.add(sub2);
-    this.subscription.add(sub3);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  constructor() {
   }
 
   getClass(index: number): string {
-    if (this.currentQuestion) {
-      if (index === this.currentQuestion.id && this.isStage(index)) {
+   const currentQuestion = this.sCurrentQuestion();
+    if (currentQuestion) {
+      if (index === currentQuestion.id && this.isStage(index)) {
         return 'item item-active item-stage';
       }
-      else if (index === this.currentQuestion.id && !this.isStage(index)) {
+      else if (index === currentQuestion.id && !this.isStage(index)) {
         return 'item item-active ';
       }
-      else if (index < this.currentQuestion.id && this.isStage(index)) {
+      else if (index < currentQuestion.id && this.isStage(index)) {
         return 'item item-passed item-stage';
       }
-      else if (index < this.currentQuestion.id && !this.isStage(index)) {
+      else if (index < currentQuestion.id && !this.isStage(index)) {
         return 'item item-passed';
       }
-      else if (index > this.currentQuestion.id && this.isStage(index)) {
+      else if (index > currentQuestion.id && this.isStage(index)) {
         return 'item item-stage';
       }
       else {
@@ -72,10 +50,7 @@ export class PyramidComponent implements OnInit, OnDestroy {
     }
   }
   getClassDot(index: number): string {
-    const question$ = this.store.select<QuestionModel>(fromQuestions.getQuestion(index));
-    let question = {} as QuestionModel;
-    const subQt = question$.subscribe(res => question = res);
-    this.subscription.add(subQt);
+    const question = this.questionsStore.getQuestion(index);
 
     if (question.goodAnswer === true) {
       return 'txt-dot answer-right';
@@ -88,9 +63,6 @@ export class PyramidComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
-
   isStage(index: number): boolean {
     if (index === 5 || index === 10 || index === 15) {
       return true;
@@ -99,15 +71,3 @@ export class PyramidComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-@NgModule({
-  declarations: [PyramidComponent],
-  imports: [
-    CommonModule,
-    SvgGainModule,
-    SvgLosangeModule
-  ],
-  exports: [PyramidComponent],
-})
-export class PyramidModule { }
-
