@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/who-wants-to-be-a-millionaire",
+    "public": "./dist/who-wants-to-be-a-millionaire",
     "ignore": [
       "firebase.json",
       "**/.*",
